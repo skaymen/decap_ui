@@ -1,0 +1,226 @@
+[
+    {
+      "platform": "ABEE-goes",
+      "agency": " AE-EDM-...",
+      "transportid": " 444A6254",
+      "config": " PsBin-AGDM-001",
+      "expiration": " ",
+      "description": " M-0112"
+    },
+    {
+      "platform": "ABNMS-goes",
+      "agency": " ESRD",
+      "transportid": " 444717A2",
+      "config": " ABMOBILE",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABNMS3-goes",
+      "agency": " ESRD",
+      "transportid": " 444B5534",
+      "config": " Special-ABMOBIL3",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABNMS4-goes",
+      "agency": " ESRD",
+      "transportid": " 444900BC",
+      "config": " Shef-AE-WQ-003",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABNMS5-goes",
+      "agency": " ESRD",
+      "transportid": " 444824AA",
+      "config": " Shef-AE-WQ-002",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABNMS6-goes",
+      "agency": " ESRD",
+      "transportid": " 4449C5A2",
+      "config": " Shef-AE-WQ-002",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABSMS-goes",
+      "agency": " AE-EDM-...",
+      "transportid": " 44415466",
+      "config": " PsBin-AGDM-001",
+      "expiration": " ",
+      "description": " M-0112"
+    },
+    {
+      "platform": "ABEE-goes",
+      "agency": " AE-EDM-...",
+      "transportid": " 444A6254",
+      "config": " PsBin-AGDM-001",
+      "expiration": " ",
+      "description": " M-0112"
+    },
+    {
+      "platform": "ABNMS-goes",
+      "agency": " ESRD",
+      "transportid": " 444717A2",
+      "config": " ABMOBILE",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABNMS3-goes",
+      "agency": " ESRD",
+      "transportid": " 444B5534",
+      "config": " Special-ABMOBIL3",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABNMS4-goes",
+      "agency": " ESRD",
+      "transportid": " 444900BC",
+      "config": " Shef-AE-WQ-003",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABNMS5-goes",
+      "agency": " ESRD",
+      "transportid": " 444824AA",
+      "config": " Shef-AE-WQ-002",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABNMS6-goes",
+      "agency": " ESRD",
+      "transportid": " 4449C5A2",
+      "config": " Shef-AE-WQ-002",
+      "expiration": " ",
+      "description": " Northern Emergency Portable Unit"
+    },
+    {
+      "platform": "ABSMS-goes",
+      "agency": " AE-EDM-...",
+      "transportid": " 44415466",
+      "config": " PsBin-AGDM-001",
+      "expiration": " ",
+      "description": " M-0112"
+    },
+    {
+        "platform": "ABEE-goes",
+        "agency": " AE-EDM-...",
+        "transportid": " 444A6254",
+        "config": " PsBin-AGDM-001",
+        "expiration": " ",
+        "description": " M-0112"
+      },
+      {
+        "platform": "ABNMS-goes",
+        "agency": " ESRD",
+        "transportid": " 444717A2",
+        "config": " ABMOBILE",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABNMS3-goes",
+        "agency": " ESRD",
+        "transportid": " 444B5534",
+        "config": " Special-ABMOBIL3",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABNMS4-goes",
+        "agency": " ESRD",
+        "transportid": " 444900BC",
+        "config": " Shef-AE-WQ-003",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABNMS5-goes",
+        "agency": " ESRD",
+        "transportid": " 444824AA",
+        "config": " Shef-AE-WQ-002",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABNMS6-goes",
+        "agency": " ESRD",
+        "transportid": " 4449C5A2",
+        "config": " Shef-AE-WQ-002",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABSMS-goes",
+        "agency": " AE-EDM-...",
+        "transportid": " 44415466",
+        "config": " PsBin-AGDM-001",
+        "expiration": " ",
+        "description": " M-0112"
+      },
+      {
+        "platform": "ABEE-goes",
+        "agency": " AE-EDM-...",
+        "transportid": " 444A6254",
+        "config": " PsBin-AGDM-001",
+        "expiration": " ",
+        "description": " M-0112"
+      },
+      {
+        "platform": "ABNMS-goes",
+        "agency": " ESRD",
+        "transportid": " 444717A2",
+        "config": " ABMOBILE",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABNMS3-goes",
+        "agency": " ESRD",
+        "transportid": " 444B5534",
+        "config": " Special-ABMOBIL3",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABNMS4-goes",
+        "agency": " ESRD",
+        "transportid": " 444900BC",
+        "config": " Shef-AE-WQ-003",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABNMS5-goes",
+        "agency": " ESRD",
+        "transportid": " 444824AA",
+        "config": " Shef-AE-WQ-002",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABNMS6-goes",
+        "agency": " ESRD",
+        "transportid": " 4449C5A2",
+        "config": " Shef-AE-WQ-002",
+        "expiration": " ",
+        "description": " Northern Emergency Portable Unit"
+      },
+      {
+        "platform": "ABSMS-goes",
+        "agency": " AE-EDM-...",
+        "transportid": " 44415466",
+        "config": " PsBin-AGDM-001",
+        "expiration": " ",
+        "description": " M-0112"
+      }
+]
