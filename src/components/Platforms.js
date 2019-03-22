@@ -7,6 +7,12 @@ import {Button, ButtonToolbar} from 'react-bootstrap';
 import './bootstrap.min.css'
 
 class Platforms extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selected: null,
+    };
+  }
   render() {
     const data = platformdata;
 
@@ -41,6 +47,24 @@ class Platforms extends Component {
           columns={columns}
 
           defaultPageSize={10}
+
+          getTrProps={(state, rowInfo) => {
+            if (rowInfo && rowInfo.row) {
+              return {
+                onClick: (e) => {
+                  this.setState({
+                    selected: rowInfo.index
+                  })
+                },
+                style: {
+                  background: rowInfo.index === this.state.selected ? '#00afec' : 'white',
+                  color: rowInfo.index === this.state.selected ? 'white' : 'black'
+                }
+              }
+            }else{
+              return {}
+            }
+          }}
         />
 
         <ButtonToolbar id ="buttonbar">
