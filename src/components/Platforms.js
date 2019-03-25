@@ -10,7 +10,8 @@ class Platforms extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: null,
+      selectedIndex: null,
+      selectedRow: null
     };
   }
   render() {
@@ -54,12 +55,13 @@ class Platforms extends Component {
               return {
                 onClick: (e) => {
                   this.setState({
-                    selected: rowInfo.index
+                    selectedIndex: rowInfo.index,
+                    selectedRow: rowInfo
                   })
                 },
                 style: {
-                  background: rowInfo.index === this.state.selected ? '#00afec' : 'white',
-                  color: rowInfo.index === this.state.selected ? 'white' : 'black'
+                  background: rowInfo.index === this.state.selectedIndex ? '#00afec' : 'white',
+                  color: rowInfo.index === this.state.selectedIndex ? 'white' : 'black'
                 }
               }
             }else{
@@ -70,30 +72,35 @@ class Platforms extends Component {
 
         <ButtonToolbar id ="buttonbar">
 
-          <Button variant="primary" onClick={(row)=>{
-            if (this.state.selected) {
-              alert("open row " + this.state.selected); 
+          <Button variant="primary" onClick={(rowInfo)=>{
+            if (this.state.selectedRow) {
+              alert("Platform: " + this.state.selectedRow.row.platform + "\n" +
+                      "Agency: " + this.state.selectedRow.row.agency + "\n" +
+                      "Transport-ID: " + this.state.selectedRow.row.transportid + "\n" +
+                      "Config: " + this.state.selectedRow.row.config + "\n" +
+                      "Expiration: " + this.state.selectedRow.row.expiration + "\n" +
+                      "Description: " + this.state.selectedRow.row.description + "\n"); 
             } else {
               alert("nothing selected!");
             }
           }}>Open</Button>
 
-          <Button variant="primary" onClick={(row)=>{
+          <Button variant="primary" onClick={(rowInfo)=>{
             alert("Create new stuff goes here");
           }}
           >New</Button>
 
-          <Button variant="primary" onClick={(row)=>{
-            if (this.state.selected) {
-              alert("copy row " + this.state.selected); 
+          <Button variant="primary" onClick={(rowInfo)=>{
+            if (this.state.selectedIndex) {
+              alert("copy row " + this.state.selectedIndex); 
             } else {
               alert("nothing selected!");
             }
           }}>Copy</Button>
 
-          <Button variant="danger" onClick={(row)=>{
-            if (this.state.selected) {
-              alert("delete row " + this.state.selected); 
+          <Button variant="danger" onClick={(rowInfo)=>{
+            if (this.state.selectedIndex) {
+              alert("delete row " + this.state.selectedIndex); 
             } else {
               alert("nothing selected!");
             }
