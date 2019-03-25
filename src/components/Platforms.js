@@ -47,6 +47,7 @@ class Platforms extends Component {
           columns={columns}
 
           defaultPageSize={10}
+          showPageSizeOptions={false}
 
           getTrProps={(state, rowInfo) => {
             if (rowInfo && rowInfo.row) {
@@ -68,10 +69,35 @@ class Platforms extends Component {
         />
 
         <ButtonToolbar id ="buttonbar">
-          <Button variant="primary">Open</Button>
-          <Button variant="primary">New</Button>
-          <Button variant="primary">Copy</Button>
-          <Button variant="danger">Delete</Button>
+
+          <Button variant="primary" onClick={(row)=>{
+            if (this.state.selected) {
+              alert("open row " + this.state.selected); 
+            } else {
+              alert("nothing selected!");
+            }
+          }}>Open</Button>
+
+          <Button variant="primary" onClick={(row)=>{
+            alert("Create new stuff goes here");
+          }}
+          >New</Button>
+
+          <Button variant="primary" onClick={(row)=>{
+            if (this.state.selected) {
+              alert("copy row " + this.state.selected); 
+            } else {
+              alert("nothing selected!");
+            }
+          }}>Copy</Button>
+
+          <Button variant="danger" onClick={(row)=>{
+            if (this.state.selected) {
+              alert("delete row " + this.state.selected); 
+            } else {
+              alert("nothing selected!");
+            }
+          }}>Delete</Button>
         </ButtonToolbar>
       </div>
     );
