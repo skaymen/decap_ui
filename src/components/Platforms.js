@@ -11,11 +11,14 @@ class Platforms extends Component {
     super(props);
     this.state = {
       selectedIndex: null,
-      selectedRow: null
+      selectedRow: null,
+      search: ''
     };
   }
+
+  
   render() {
-    const data = platformdata;
+    let data = platformdata;
 
     const columns = [{
       Header: 'Platform',
@@ -38,10 +41,28 @@ class Platforms extends Component {
     },
     ];
 
+    if (this.state.search) {
+			data = data.filter(row => {
+        return row.platform.includes(this.state.search) || row.agency.includes(this.state.search) || row.transportid.includes(this.state.search) ||
+          row.config.includes(this.state.search) || row.expiration.includes(this.state.search) || row.description.includes(this.state.search);
+			})
+		}
+
 
     return (
-      <div>
-        <h2 id="title"> Platforms </h2>
+      <div id="platforms_div">
+       
+
+        <div id="platform-header" style={{flexDirection: 'row'}}>
+          <h2 id="title" > Platforms </h2>
+          <div id="filter">
+            Filter: <input 
+                      value={this.state.search}
+                      onChange={e => this.setState({search: e.target.value})}
+                    />
+          </div>
+        </div>
+        
 
         <ReactTable
           data={data}

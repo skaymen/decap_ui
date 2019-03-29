@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 .App-header {
@@ -22,8 +23,16 @@
   margin: 1vh 1vh;
 }
 
-#buttonbar {
-  /* justify-content: center; */
+#platform-header {
+  display: flex;
+}
+
+#filter {
+  margin: 2vh 2vh;
+  text-align: right;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .btn {
