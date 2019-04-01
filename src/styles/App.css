@@ -1,0 +1,60 @@
+.App {
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 10vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+/* TODO: Absolutely no idea what's going on here, but I cannot get the logo to stick on the left
+while the title and buttons are centered. Leaving everything centered for now */
+
+img#logo {
+  margin: 1vh 1vh;
+  justify-content: flex-start;
+  text-align: left;
+  -webkit-justify-content: flex-start;
+  -webkit-align-items: flex-start;
+  align-items: flex-start;
+  display: flex;
+}
+
+div#title-buttons {
+  align-items: right !important;
+  justify-content: right !important;
+} 
+
+.App-link {
+  color: #61dafb;
+}
+
+.btn {
+  margin: 1vh 1vh;
+}
+
+/* .btn-toolbar {
+  align-items: center;
+  align-self: center;
+  align-content: center;
+  justify-content: center;
+  justify-self: center;
+  justify-items: center;
+  text-align: center;
+} */
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

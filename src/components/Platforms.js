@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import '../App.css';
+import '../styles/App.css';
+import '../styles/Platforms.css'
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import platformdata from './platformdata.json';
+import platformdata from '../data/platformdata.json';
 import {Button, ButtonToolbar} from 'react-bootstrap';
-import './bootstrap.min.css'
+import '../styles/bootstrap.min.css'
 
 class Platforms extends Component {
   constructor(props) {

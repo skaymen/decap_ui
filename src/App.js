@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import './App.css';
+import './styles/App.css';
 import Platforms from './components/Platforms';
 import {Button, ButtonToolbar} from 'react-bootstrap';
-import './components/bootstrap.min.css'
+import './styles/bootstrap.min.css'
+import Logo from './images/usgs_logo.svg';
 
 
 class App extends Component {
@@ -72,7 +73,12 @@ class Header extends App {
 
   render() {return (
   <header className="App-header">
-  <h1> DECAP Database Editor </h1>
+
+  <img src={Logo} alt="usgs_logo" id="logo"/>
+
+  <div id="title-buttons">
+  <h1 id="decap-title"> DECAP Database Editor </h1>
+
   <ButtonToolbar>
     <Button variant="outline-primary" onClick = {() => {
       this.props.change('Platforms');
@@ -90,6 +96,10 @@ class Header extends App {
       this.props.change('Messages')
     }}>Messages</Button>
   </ButtonToolbar>
+  </div>
+
+
+
 </header>)
 }}
 
