@@ -4,19 +4,34 @@ import '../styles/Platforms.css'
 import ReactTable from 'react-table';
 import 'react-table/react-table.css';
 import platformdata from '../data/platformdata.json';
-import {Button, ButtonToolbar} from 'react-bootstrap';
+import {Button, ButtonToolbar, Modal} from 'react-bootstrap';
 import '../styles/bootstrap.min.css'
 
 class Platforms extends Component {
   constructor(props) {
     super(props);
+
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+
     this.state = {
       selectedIndex: null,
-      selectedRow: null,
-      search: ''
+      selectedRow: { original: { platform: "XXX", agency: " ESRD",transportid:" 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit" },
+        row:{ _original: { platform: "ABNMS5-goes", agency: " ESRD", transportid: " 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit" },
+        _index: 4, _nestingLevel: 0, platform: "ABNMS5-goes", agency: " ESRD", transportid: " 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit", _viewIndex: 4 },
+        index:4 , viewIndex: 4, pageSize: 10, page: 0, level: 0, nestingPath: [4] },
+      search: '',
+      show: false
     };
   }
 
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
   
   render() {
     let data = platformdata;
@@ -47,7 +62,8 @@ class Platforms extends Component {
         return row.platform.includes(this.state.search) || row.agency.includes(this.state.search) || row.transportid.includes(this.state.search) ||
           row.config.includes(this.state.search) || row.expiration.includes(this.state.search) || row.description.includes(this.state.search);
 			})
-		}
+    }
+    
 
 
     return (
@@ -94,25 +110,20 @@ class Platforms extends Component {
 
         <ButtonToolbar id ="buttonbar">
 
-          <Button variant="primary" onClick={(rowInfo)=>{
-            if (this.state.selectedRow) {
-              alert("Platform: " + this.state.selectedRow.row.platform + "\n" +
-                      "Agency: " + this.state.selectedRow.row.agency + "\n" +
-                      "Transport-ID: " + this.state.selectedRow.row.transportid + "\n" +
-                      "Config: " + this.state.selectedRow.row.config + "\n" +
-                      "Expiration: " + this.state.selectedRow.row.expiration + "\n" +
-                      "Description: " + this.state.selectedRow.row.description + "\n"); 
+          <Button variant="primary" onClick={()=>{
+            if (this.state.selectedIndex) {
+              this.handleShow();
             } else {
               alert("nothing selected!");
             }
           }}>Open</Button>
 
-          <Button variant="primary" onClick={(rowInfo)=>{
+          <Button variant="primary" onClick={ ()=>{
             alert("Create new stuff goes here");
           }}
           >New</Button>
 
-          <Button variant="primary" onClick={(rowInfo)=>{
+          <Button variant="primary" onClick={ ()=>{
             if (this.state.selectedIndex) {
               alert("copy row " + this.state.selectedIndex); 
             } else {
@@ -120,7 +131,7 @@ class Platforms extends Component {
             }
           }}>Copy</Button>
 
-          <Button variant="danger" onClick={(rowInfo)=>{
+          <Button variant="danger" onClick={()=>{
             if (this.state.selectedIndex) {
               alert("delete row " + this.state.selectedIndex); 
             } else {
@@ -128,6 +139,28 @@ class Platforms extends Component {
             }
           }}>Delete</Button>
         </ButtonToolbar>
+
+        <Modal show={this.state.show} onHide={this.handleClose}>
+
+          <Modal.Header closeButton>
+            <Modal.Title>{this.state.selectedRow.row.platform}</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body>
+            <table>
+              <tr>Agency: {this.state.selectedRow.row.agency}</tr>
+              <tr>Transport-ID: {this.state.selectedRow.row.transportid}</tr>
+              <tr>Config: {this.state.selectedRow.row.config}</tr>
+              <tr>Expiration: {this.state.selectedRow.row.expiration}</tr>
+              <tr>Description: {this.state.selectedRow.row.description}</tr>
+            </table>
+          </Modal.Body>
+
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleClose}>Close</Button>
+          </Modal.Footer>
+
+        </Modal>
       </div>
     );
   }
