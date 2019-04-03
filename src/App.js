@@ -11,6 +11,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // the platforms component is loaded by default
       selectedPage: 'Platforms'
     };
     this.change = this.change.bind(this)
@@ -23,9 +24,14 @@ class App extends Component {
 
   render() {
 
+    //TODO: these if statements are probably not the best way to handle this
+    // best practice seems to be mounting / unmounting components based on state change
+
+    //display the selected page/component-- only platforms are currently set up
     if (this.state.selectedPage === 'Platforms') {
       return (
         <div className="App">
+          {/* pass in selected page and change function to the header component */}
           <Header selectedPage={this.state.selectedPage} change={this.change}/>
           <Platforms />
         </div>
@@ -59,6 +65,7 @@ class App extends Component {
       );
     }
 
+    //most likely unreachable edgecase
     else {
       return (
         <div className="App">
@@ -69,6 +76,7 @@ class App extends Component {
   }
 }
 
+//separate component for the header. contains 
 class Header extends App {
 
   render() {return (
@@ -79,8 +87,10 @@ class Header extends App {
   <div id="title-buttons">
   <h1 id="decap-title"> DECAP Database Editor </h1>
 
+{/* button toolbar for navigating between pages. on click, change state to display the correct page */}
   <ButtonToolbar>
     <Button variant="outline-primary" onClick = {() => {
+      // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
       this.props.change('Platforms');
     }}>Platforms</Button>
 

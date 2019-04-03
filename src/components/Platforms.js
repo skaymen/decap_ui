@@ -11,11 +11,13 @@ class Platforms extends Component {
   constructor(props) {
     super(props);
 
+    //bind functions to show and close the modla
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
 
     this.state = {
       selectedIndex: null,
+      //dummy data so we don't have an error with the modal-- probably best to get rid of this somehow, but not sure how
       selectedRow: { original: { platform: "XXX", agency: " ESRD",transportid:" 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit" },
         row:{ _original: { platform: "ABNMS5-goes", agency: " ESRD", transportid: " 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit" },
         _index: 4, _nestingLevel: 0, platform: "ABNMS5-goes", agency: " ESRD", transportid: " 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit", _viewIndex: 4 },
@@ -36,6 +38,7 @@ class Platforms extends Component {
   render() {
     let data = platformdata;
 
+    //define columns for the data table
     const columns = [{
       Header: 'Platform',
       accessor: 'platform', // String-based value accessors!
@@ -57,6 +60,7 @@ class Platforms extends Component {
     },
     ];
 
+    // define the filter functionality for the table-- all columns are searched at the same time
     if (this.state.search) {
 			data = data.filter(row => {
         return row.platform.includes(this.state.search) || row.agency.includes(this.state.search) || row.transportid.includes(this.state.search) ||
@@ -67,9 +71,10 @@ class Platforms extends Component {
 
 
     return (
-      <div id="platforms_div">
-       
 
+
+      <div id="platforms_div">
+      {/* put some style here to make the title and filter box go where they are supposed to */}
         <div id="platform-header" style={{flexDirection: 'row'}}>
           <h2 id="title" > Platforms </h2>
           <div id="filter">
@@ -80,14 +85,16 @@ class Platforms extends Component {
           </div>
         </div>
         
-
+      {/* define the data table */}
         <ReactTable
           data={data}
           columns={columns}
 
+          // set the default number of rows to display. take away ability to change thos.
           defaultPageSize={10}
           showPageSizeOptions={false}
 
+          //this is code to make elements within the table selectable
           getTrProps={(state, rowInfo) => {
             if (rowInfo && rowInfo.row) {
               return {
@@ -108,10 +115,12 @@ class Platforms extends Component {
           }}
         />
 
+        {/* button toolbar for table interaction functionality */}
         <ButtonToolbar id ="buttonbar">
 
           <Button variant="primary" onClick={()=>{
             if (this.state.selectedIndex) {
+              //call the function to display the data modal
               this.handleShow();
             } else {
               alert("nothing selected!");
@@ -140,6 +149,8 @@ class Platforms extends Component {
           }}>Delete</Button>
         </ButtonToolbar>
 
+        {/* this is a modal, or pop-up window, that displays data from a selected row on clicking the "open" button
+        we are using a modal here so we can have a pop up window instead of a new component */}
         <Modal show={this.state.show} onHide={this.handleClose}>
 
           <Modal.Header closeButton>
