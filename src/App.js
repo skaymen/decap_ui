@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import './styles/App.css';
 import Platforms from './components/Platforms';
 import {Button, ButtonToolbar} from 'react-bootstrap';
+
+import './styles/App.css';
 import './styles/bootstrap.min.css'
+
 import Logo from './images/usgs_logo.svg';
 
 
@@ -39,7 +41,7 @@ class App extends Component {
     }
 
     else if (this.state.selectedPage === 'Sites') {
-      return (
+      return ( 
         <div className="App">
           <Header selectedPage={this.state.selectedPage} change={this.change}/>
           <h2> Sites</h2>
@@ -87,7 +89,7 @@ class Header extends App {
   <div id="title-buttons">
   <h1 id="decap-title"> DECAP Database Editor </h1>
 
-{/* button toolbar for navigating between pages. on click, change state to display the correct page */}
+  {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
   <ButtonToolbar>
     <Button variant="outline-primary" onClick = {() => {
       // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?

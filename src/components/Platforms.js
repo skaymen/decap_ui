@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
+import ReactTable from 'react-table';
+import {Button, ButtonToolbar, Modal, Dropdown, DropdownButton} from 'react-bootstrap';
+
 import '../styles/App.css';
 import '../styles/Platforms.css'
-import ReactTable from 'react-table';
 import 'react-table/react-table.css';
-import platformdata from '../data/platformdata.json';
-import {Button, ButtonToolbar, Modal} from 'react-bootstrap';
 import '../styles/bootstrap.min.css'
+
+import platformdata from '../data/platformdata.json';
 
 class Platforms extends Component {
   constructor(props) {
     super(props);
 
-    //bind functions to show and close the modla
+    //bind functions to show and close the modal
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
 
@@ -23,7 +25,8 @@ class Platforms extends Component {
         _index: 4, _nestingLevel: 0, platform: "ABNMS5-goes", agency: " ESRD", transportid: " 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit", _viewIndex: 4 },
         index:4 , viewIndex: 4, pageSize: 10, page: 0, level: 0, nestingPath: [4] },
       search: '',
-      show: false
+      show: false,
+      filterState: "all"
     };
   }
 
@@ -34,6 +37,12 @@ class Platforms extends Component {
   handleShow() {
     this.setState({ show: true });
   }
+
+  changeFilter(newState) {
+    this.setState({ filterState: newState })
+  }
+
+
   
   render() {
     let data = platformdata;
@@ -63,8 +72,33 @@ class Platforms extends Component {
     // define the filter functionality for the table-- all columns are searched at the same time
     if (this.state.search) {
 			data = data.filter(row => {
-        return row.platform.includes(this.state.search) || row.agency.includes(this.state.search) || row.transportid.includes(this.state.search) ||
-          row.config.includes(this.state.search) || row.expiration.includes(this.state.search) || row.description.includes(this.state.search);
+
+        switch(this.state.filterState) {
+
+          case "platform":
+            return row.platform.includes(this.state.search);
+
+          case "agency":
+            return row.agency.includes(this.state.search);
+
+          case "transportid":
+            return row.transportid.includes(this.state.search);
+
+          case "config":
+            return row.config.includes(this.state.search);
+
+          case "expiration":
+            return row.expiration.includes(this.state.search);
+
+          case "description":
+            return row.description.includes(this.state.search);
+
+          default:
+            return row.platform.includes(this.state.search) 
+              || row.agency.includes(this.state.search) || row.transportid.includes(this.state.search) ||
+              row.config.includes(this.state.search) || row.expiration.includes(this.state.search) || row.description.includes(this.state.search);
+        }
+        
 			})
     }
     
@@ -78,10 +112,21 @@ class Platforms extends Component {
         <div id="platform-header" style={{flexDirection: 'row'}}>
           <h2 id="title" > Platforms </h2>
           <div id="filter">
+            <DropdownButton id="dropdown-basic-button" title="Filter column">
+              <Dropdown.Item href="#/action-1" onClick= { () => {this.changeFilter("platform"); }}>Platform</Dropdown.Item>
+              <Dropdown.Item href="#/action-2" onClick= { () => {this.changeFilter("agency"); }}>Agency</Dropdown.Item>
+              <Dropdown.Item href="#/action-3" onClick= { () => {this.changeFilter("transportid"); }}>Transport-ID</Dropdown.Item>
+              <Dropdown.Item href="#/action-4" onClick= { () => {this.changeFilter("config"); }}>Config</Dropdown.Item>
+              <Dropdown.Item href="#/action-5" onClick= { () => {this.changeFilter("expiration"); }}>Expiration</Dropdown.Item>
+              <Dropdown.Item href="#/action-6" onClick= { () => {this.changeFilter("description"); }}>Description</Dropdown.Item>
+              <Dropdown.Item href="#/action-7" onClick= { () => {this.changeFilter("all"); }}>Description</Dropdown.Item>
+            </DropdownButton>
+
             Filter: <input 
                       value={this.state.search}
                       onChange={e => this.setState({search: e.target.value})}
                     />
+            
           </div>
         </div>
         

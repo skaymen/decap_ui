@@ -17,7 +17,7 @@
 /* TODO: Absolutely no idea what's going on here, but I cannot get the logo to stick on the left
 while the title and buttons are centered. Leaving everything centered for now */
 
-img#logo {
+/* #logo {
   margin: 1vh 1vh;
   justify-content: flex-start;
   text-align: left;
@@ -30,7 +30,11 @@ img#logo {
 div#title-buttons {
   align-items: right !important;
   justify-content: right !important;
-} 
+}  */
+
+/* #logo {
+  align-self: flex-start;
+} */
 
 .App-link {
   color: #61dafb;
