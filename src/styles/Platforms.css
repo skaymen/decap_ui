@@ -13,6 +13,17 @@
     flex: 1;
     flex-direction: row;
     justify-content: space-between;
+    display: inline-block;
+  }
+
+  #filter-dropdown {
+    /* text-align: left; */
+    flex: 1;
+    flex-direction: row;
+    justify-content: flex-start;
+    float: right;
+    margin-top: 0;
+    margin-bottom: 0;
   }
 
 .ReactTable {

@@ -26,7 +26,7 @@ class Platforms extends Component {
         index:4 , viewIndex: 4, pageSize: 10, page: 0, level: 0, nestingPath: [4] },
       search: '',
       show: false,
-      filterState: "all"
+      filterState: "All"
     };
   }
 
@@ -75,22 +75,22 @@ class Platforms extends Component {
 
         switch(this.state.filterState) {
 
-          case "platform":
+          case "Platform":
             return row.platform.includes(this.state.search);
 
-          case "agency":
+          case "Agency":
             return row.agency.includes(this.state.search);
 
-          case "transportid":
+          case "Transportid":
             return row.transportid.includes(this.state.search);
 
-          case "config":
+          case "Config":
             return row.config.includes(this.state.search);
 
-          case "expiration":
+          case "Expiration":
             return row.expiration.includes(this.state.search);
 
-          case "description":
+          case "Description":
             return row.description.includes(this.state.search);
 
           default:
@@ -111,15 +111,18 @@ class Platforms extends Component {
       {/* put some style here to make the title and filter box go where they are supposed to */}
         <div id="platform-header" style={{flexDirection: 'row'}}>
           <h2 id="title" > Platforms </h2>
+          
           <div id="filter">
-            <DropdownButton id="dropdown-basic-button" title="Filter column">
-              <Dropdown.Item href="#/action-1" onClick= { () => {this.changeFilter("platform"); }}>Platform</Dropdown.Item>
-              <Dropdown.Item href="#/action-2" onClick= { () => {this.changeFilter("agency"); }}>Agency</Dropdown.Item>
-              <Dropdown.Item href="#/action-3" onClick= { () => {this.changeFilter("transportid"); }}>Transport-ID</Dropdown.Item>
-              <Dropdown.Item href="#/action-4" onClick= { () => {this.changeFilter("config"); }}>Config</Dropdown.Item>
-              <Dropdown.Item href="#/action-5" onClick= { () => {this.changeFilter("expiration"); }}>Expiration</Dropdown.Item>
-              <Dropdown.Item href="#/action-6" onClick= { () => {this.changeFilter("description"); }}>Description</Dropdown.Item>
-              <Dropdown.Item href="#/action-7" onClick= { () => {this.changeFilter("all"); }}>Description</Dropdown.Item>
+           
+            <DropdownButton id="filter-dropdown" title={this.state.filterState}>
+              <Dropdown.Item onClick= { () => {this.changeFilter("Platform"); }}>Platform</Dropdown.Item>
+              <Dropdown.Item onClick= { () => {this.changeFilter("Agency"); }}>Agency</Dropdown.Item>
+              <Dropdown.Item onClick= { () => {this.changeFilter("Transport-ID"); }}>Transport-ID</Dropdown.Item>
+              <Dropdown.Item onClick= { () => {this.changeFilter("Config"); }}>Config</Dropdown.Item>
+              <Dropdown.Item onClick= { () => {this.changeFilter("Expiration"); }}>Expiration</Dropdown.Item>
+              <Dropdown.Item onClick= { () => {this.changeFilter("Description"); }}>Description</Dropdown.Item>
+              <Dropdown.Divider/>
+              <Dropdown.Item onClick= { () => {this.changeFilter("All"); }}>All</Dropdown.Item>
             </DropdownButton>
 
             Filter: <input 
