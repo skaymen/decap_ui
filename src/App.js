@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Platforms from './components/Platforms';
 import {Button, ButtonToolbar} from 'react-bootstrap';
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import './styles/App.css';
 import './styles/bootstrap.min.css'
@@ -82,66 +82,105 @@ class App extends Component {
 //separate component for the header. contains 
 class Header extends App {
 
-  render() {return (
-  <header className="App-header">
+  render() { return (
+    <header className="App-header">
 
-  <img src={Logo} alt="usgs_logo" id="logo"/>
+      <img src={Logo} alt="usgs_logo" id="logo"/>
 
-  <div id="title-buttons">
-  <h1 id="decap-title"> DECAP Database Editor </h1>
+      <div id="title-buttons">
+        <h1 id="decap-title"> DECAP Database Editor </h1>
 
-  {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
-  <ButtonToolbar>
-    <Button variant="outline-primary" onClick = {() => {
-      // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
-      this.props.change('Platforms');
-    }}>Platforms</Button>
+        {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
+        <ButtonToolbar>
+          <Button variant="outline-primary" onClick = {() => {
+            // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
+            this.props.change('Platforms');
+          }}>Platforms</Button>
 
-    <Button variant="outline-primary" onClick = {() => {
-      this.props.change('Sites');
-    }}>Sites</Button>
+          <Button variant="outline-primary" onClick = {() => {
+            this.props.change('Sites');
+          }}>Sites</Button>
 
-    <Button variant="outline-primary" onClick = {() => {
-      this.props.change('Configurations');
-    }}>Configurations</Button>
+          <Button variant="outline-primary" onClick = {() => {
+            this.props.change('Configurations');
+          }}>Configurations</Button>
 
-    <Button variant="outline-primary" onClick = {() => {
-      this.props.change('Messages')
-    }}>Messages</Button>
-  </ButtonToolbar>
-  </div>
-
-
-
-</header>)
+          <Button variant="outline-primary" onClick = {() => {
+            this.props.change('Messages')
+          }}>Messages</Button>
+        </ButtonToolbar>
+      </div>
+    </header>)
 }}
 
 // This is code for making the app multi-page. For now, we are simply adding and removing components on a single page
 
-// function Page2() {
-//   return <h1>Page 2!</h1>;
-// }
+const routes = [
+  {
+    path: "/",
+    exact: true,
+    sidebar: () => <div>Database Editor</div>,
+    main: () => <App></App>
+  },
+  {
+    path: "/page2",
+    sidebar: () => <div>Page 2</div>,
+    main: () => <h2>Page 2</h2>
+  },
+];
 
-// function AppRouter() {
-//   return (
-//     <Router>
-//       <div>
-//         <nav>
-//           <ul>
-//             <li>
-//               <Link to="/">App</Link>
-//             </li>
-//             <li>
-//               <Link to="/page2/">Page2</Link>
-//             </li>
-//           </ul>
-//         </nav>
+function Sidebar() {
+  return (
+    <Router>
+      <div style={{ display: "flex" }}>
+        <div
+          style={{
+            padding: "10px",
+            width: "10%",
+            background: "#f0f0f0"
+          }}
+        >
+          <ul style={{ listStyleType: "none", padding: 0 }} id="sidebar-list">
+            <li>
+              <Link to="/">Database Editor</Link>
+            </li>
+            <li>
+              <Link to="/page2">Page 2</Link>
+            </li>
+          </ul>
 
-//         <Route path="/" exact component={App} />
-//         <Route path="/page2/" component={Page2} />
-//       </div>
-//     </Router>
-//   );
-// }
+          {routes.map((route, index) => (
+            // You can render a <Route> in as many places
+            // as you want in your app. It will render along
+            // with any other <Route>s that also match the URL.
+            // So, a sidebar or breadcrumbs or anything else
+            // that requires you to render multiple things
+            // in multiple places at the same URL is nothing
+            // more than multiple <Route>s.
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              component={route.sidebar}
+            />
+          ))}
+        </div>
 
-export default App;
+        <div style={{ flex: 1, padding: "10px" }}>
+          {routes.map((route, index) => (
+            // Render more <Route>s with the same paths as
+            // above, but different components this time.
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              component={route.main}
+            />
+          ))}
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+export default Sidebar;
