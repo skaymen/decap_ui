@@ -208,13 +208,11 @@ class Platforms extends Component {
           </Modal.Header>
 
           <Modal.Body>
-            <table>
-              <tr>Agency: {this.state.selectedRow.row.agency}</tr>
-              <tr>Transport-ID: {this.state.selectedRow.row.transportid}</tr>
-              <tr>Config: {this.state.selectedRow.row.config}</tr>
-              <tr>Expiration: {this.state.selectedRow.row.expiration}</tr>
-              <tr>Description: {this.state.selectedRow.row.description}</tr>
-            </table>
+            <p>Agency: {this.state.selectedRow.row.agency}</p>
+            <p>Transport-ID: {this.state.selectedRow.row.transportid}</p>
+            <p>Config: {this.state.selectedRow.row.config}</p>
+            <p>Expiration: {this.state.selectedRow.row.expiration}</p>
+            <p>Description: {this.state.selectedRow.row.description}</p>
           </Modal.Body>
 
           <Modal.Footer>
