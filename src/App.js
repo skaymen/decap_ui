@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Platforms from './components/Platforms';
 import {Button, ButtonToolbar} from 'react-bootstrap';
+// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import './styles/App.css';
 import './styles/bootstrap.min.css'
@@ -114,5 +115,33 @@ class Header extends App {
 
 </header>)
 }}
+
+// This is code for making the app multi-page. For now, we are simply adding and removing components on a single page
+
+// function Page2() {
+//   return <h1>Page 2!</h1>;
+// }
+
+// function AppRouter() {
+//   return (
+//     <Router>
+//       <div>
+//         <nav>
+//           <ul>
+//             <li>
+//               <Link to="/">App</Link>
+//             </li>
+//             <li>
+//               <Link to="/page2/">Page2</Link>
+//             </li>
+//           </ul>
+//         </nav>
+
+//         <Route path="/" exact component={App} />
+//         <Route path="/page2/" component={Page2} />
+//       </div>
+//     </Router>
+//   );
+// }
 
 export default App;

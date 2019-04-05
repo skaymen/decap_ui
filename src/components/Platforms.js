@@ -18,7 +18,7 @@ class Platforms extends Component {
     this.handleClose = this.handleClose.bind(this);
 
     this.state = {
-      selectedIndex: null,
+      selectedIndex: -1,
       //dummy data so we don't have an error with the modal-- probably best to get rid of this somehow, but not sure how
       selectedRow: { original: { platform: "XXX", agency: " ESRD",transportid:" 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit" },
         row:{ _original: { platform: "ABNMS5-goes", agency: " ESRD", transportid: " 444824AA", config: " Shef-AE-WQ-002", expiration: " ", description: " Northern Emergency Portable Unit" },
@@ -69,7 +69,7 @@ class Platforms extends Component {
     },
     ];
 
-    // define the filter functionality for the table-- all columns are searched at the same time
+    // define the filter functionality for the table-- which column is searched depends on what is selected
     if (this.state.search) {
 			data = data.filter(row => {
 
@@ -81,7 +81,7 @@ class Platforms extends Component {
           case "Agency":
             return row.agency.includes(this.state.search);
 
-          case "Transportid":
+          case "Transport-ID":
             return row.transportid.includes(this.state.search);
 
           case "Config":
@@ -93,6 +93,7 @@ class Platforms extends Component {
           case "Description":
             return row.description.includes(this.state.search);
 
+          // search all columns
           default:
             return row.platform.includes(this.state.search) 
               || row.agency.includes(this.state.search) || row.transportid.includes(this.state.search) ||
@@ -114,6 +115,7 @@ class Platforms extends Component {
           
           <div id="filter">
            
+           {/* dropdown buttons for selecting what to filter by */}
             <DropdownButton id="filter-dropdown" title={this.state.filterState}>
               <Dropdown.Item onClick= { () => {this.changeFilter("Platform"); }}>Platform</Dropdown.Item>
               <Dropdown.Item onClick= { () => {this.changeFilter("Agency"); }}>Agency</Dropdown.Item>
@@ -146,7 +148,7 @@ class Platforms extends Component {
           getTrProps={(state, rowInfo) => {
             if (rowInfo && rowInfo.row) {
               return {
-                onClick: (e) => {
+                onClick: () => {
                   this.setState({
                     selectedIndex: rowInfo.index,
                     selectedRow: rowInfo
@@ -167,7 +169,7 @@ class Platforms extends Component {
         <ButtonToolbar id ="buttonbar">
 
           <Button variant="primary" onClick={()=>{
-            if (this.state.selectedIndex) {
+            if (this.state.selectedIndex >= 0) {
               //call the function to display the data modal
               this.handleShow();
             } else {
