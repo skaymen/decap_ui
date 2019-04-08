@@ -91,7 +91,7 @@ class Header extends App {
         <h1 id="decap-title"> DECAP Database Editor </h1>
 
         {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
-        <ButtonToolbar>
+        <ButtonToolbar id="comp-toolbar">
           <Button variant="outline-primary" onClick = {() => {
             // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
             this.props.change('Platforms');
