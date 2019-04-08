@@ -141,12 +141,17 @@ function Sidebar() {
           }}
         >
           <ul style={{ listStyleType: "none", padding: 0 }} id="sidebar-list">
-            <li>
-              <Link to="/">Database Editor</Link>
-            </li>
-            <li>
-              <Link to="/page2">Page 2</Link>
-            </li>
+            <Link to="/">
+              <Button variant="outline-primary" id="sidebar-button">
+                Database Editor
+              </Button>
+            </Link>
+
+            <Link to="/page2">
+              <Button variant="outline-primary" id="sidebar-button">
+                Page 2
+              </Button>
+            </Link>
           </ul>
 
           {routes.map((route, index) => (

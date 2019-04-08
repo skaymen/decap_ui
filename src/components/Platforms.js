@@ -168,7 +168,7 @@ class Platforms extends Component {
         {/* button toolbar for table interaction functionality */}
         <ButtonToolbar id ="buttonbar">
 
-          <Button variant="primary" onClick={()=>{
+          <Button variant="primary" id="platform-button" onClick={()=>{
             if (this.state.selectedIndex >= 0) {
               //call the function to display the data modal
               this.handleShow();
@@ -177,12 +177,12 @@ class Platforms extends Component {
             }
           }}>Open</Button>
 
-          <Button variant="primary" onClick={ ()=>{
+          <Button variant="primary" id="platform-button" onClick={ ()=>{
             alert("Create new stuff goes here");
           }}
           >New</Button>
 
-          <Button variant="primary" onClick={ ()=>{
+          <Button variant="primary" id="platform-button" onClick={ ()=>{
             if (this.state.selectedIndex) {
               alert("copy row " + this.state.selectedIndex); 
             } else {
@@ -190,7 +190,7 @@ class Platforms extends Component {
             }
           }}>Copy</Button>
 
-          <Button variant="danger" onClick={()=>{
+          <Button variant="danger" id="platform-button" onClick={()=>{
             if (this.state.selectedIndex) {
               alert("delete row " + this.state.selectedIndex); 
             } else {
