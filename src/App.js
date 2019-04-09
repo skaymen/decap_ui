@@ -24,58 +24,14 @@ class App extends Component {
     this.setState({selectedPage: value});
   }
 
-
   render() {
-
-    //TODO: these if statements are probably not the best way to handle this
-    // best practice seems to be mounting / unmounting components based on state change
-
     //display the selected page/component-- only platforms are currently set up
-    if (this.state.selectedPage === 'Platforms') {
-      return (
-        <div className="App">
-          {/* pass in selected page and change function to the header component */}
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-          <Platforms />
-        </div>
-      );
-    }
-
-    else if (this.state.selectedPage === 'Sites') {
-      return ( 
-        <div className="App">
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-          <h2> Sites</h2>
-        </div>
-      );
-    }
-
-    else if (this.state.selectedPage === 'Configurations') {
-      return (
-        <div className="App">
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-          <h2> Configurations</h2>
-        </div>
-      );
-    }
-
-    else if (this.state.selectedPage === 'Messages') {
-      return (
-        <div className="App">
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-          <h2> Messages</h2>
-        </div>
-      );
-    }
-
-    //most likely unreachable edgecase
-    else {
-      return (
-        <div className="App">
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-        </div>
-      );
-    }
+    return (
+      <div className="App">
+        <Header selectedPage={this.state.selectedPage} change={this.change}/>
+        <Body selectedPage={this.state.selectedPage} />
+      </div>
+    )
   }
 }
 
@@ -112,6 +68,30 @@ class Header extends App {
       </div>
     </header>)
 }}
+
+class Body extends Component {
+
+  render() {
+    
+    switch(this.props.selectedPage) {
+
+      case 'Platforms':
+        return <Platforms/>;
+
+      case 'Sites':
+        return <h2>Sites</h2>;
+
+      case 'Configurations':
+        return <h2>Configurations</h2>;
+
+      case 'Messages':
+        return <h2>Messages</h2>;
+
+      default:
+        return null;
+    }
+  }
+}
 
 // This is code for making the app multi-page. For now, we are simply adding and removing components on a single page
 
