@@ -15,6 +15,34 @@ import "../styles/bootstrap.min.css";
 
 import platformdata from "../data/platformdata.json";
 
+//define columns for the data table
+const columns = [
+  {
+    Header: "Platform",
+    accessor: "platform" // String-based value accessors!
+  },
+  {
+    Header: "Agency",
+    accessor: "agency"
+  },
+  {
+    Header: "Transport-ID",
+    accessor: "transportid"
+  },
+  {
+    Header: "Config",
+    accessor: "config"
+  },
+  {
+    Header: "Expiration",
+    accessor: "expiration"
+  },
+  {
+    Header: "Description",
+    accessor: "description"
+  }
+];
+
 class Platforms extends Component {
   constructor(props) {
     super(props);
@@ -26,41 +54,7 @@ class Platforms extends Component {
     this.state = {
       selectedIndex: -1,
       //dummy data so we don't have an error with the modal-- probably best to get rid of this somehow, but not sure how
-      selectedRow: {
-        original: {
-          platform: "XXX",
-          agency: " ESRD",
-          transportid: " 444824AA",
-          config: " Shef-AE-WQ-002",
-          expiration: " ",
-          description: " Northern Emergency Portable Unit"
-        },
-        row: {
-          _original: {
-            platform: "ABNMS5-goes",
-            agency: " ESRD",
-            transportid: " 444824AA",
-            config: " Shef-AE-WQ-002",
-            expiration: " ",
-            description: " Northern Emergency Portable Unit"
-          },
-          _index: 4,
-          _nestingLevel: 0,
-          platform: "ABNMS5-goes",
-          agency: " ESRD",
-          transportid: " 444824AA",
-          config: " Shef-AE-WQ-002",
-          expiration: " ",
-          description: " Northern Emergency Portable Unit",
-          _viewIndex: 4
-        },
-        index: 4,
-        viewIndex: 4,
-        pageSize: 10,
-        page: 0,
-        level: 0,
-        nestingPath: [4]
-      },
+      selectedRow: {},
       search: "",
       show: false,
       filterState: "All"
@@ -81,35 +75,6 @@ class Platforms extends Component {
 
   render() {
     let data = platformdata;
-
-    //define columns for the data table
-    const columns = [
-      {
-        Header: "Platform",
-        accessor: "platform" // String-based value accessors!
-      },
-      {
-        Header: "Agency",
-        accessor: "agency"
-      },
-      {
-        Header: "Transport-ID",
-        accessor: "transportid"
-      },
-      {
-        Header: "Config",
-        accessor: "config"
-      },
-      {
-        Header: "Expiration",
-        accessor: "expiration"
-      },
-      {
-        Header: "Description",
-        accessor: "description"
-      }
-    ];
-
     // define the filter functionality for the table-- which column is searched depends on what is selected
     if (this.state.search) {
       data = data.filter(row => {
@@ -308,15 +273,23 @@ class Platforms extends Component {
         we are using a modal here so we can have a pop up window instead of a new component */}
         <Modal show={this.state.show} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>{this.state.selectedRow.row.platform}</Modal.Title>
+            <Modal.Title>
+              {this.state.selectedRow.row === undefined
+                ? null
+                : this.state.selectedRow.row.platform}
+            </Modal.Title>
           </Modal.Header>
 
           <Modal.Body>
-            <p>Agency: {this.state.selectedRow.row.agency}</p>
-            <p>Transport-ID: {this.state.selectedRow.row.transportid}</p>
-            <p>Config: {this.state.selectedRow.row.config}</p>
-            <p>Expiration: {this.state.selectedRow.row.expiration}</p>
-            <p>Description: {this.state.selectedRow.row.description}</p>
+            {this.state.selectedRow.row === undefined ? null : (
+              <React.Fragment>
+                <p>Agency: {this.state.selectedRow.row.agency}</p>
+                <p>Transport-ID: {this.state.selectedRow.row.transportid}</p>
+                <p>Config: {this.state.selectedRow.row.config}</p>
+                <p>Expiration: {this.state.selectedRow.row.expiration}</p>
+                <p>Description: {this.state.selectedRow.row.description}</p>
+              </React.Fragment>
+            )}
           </Modal.Body>
 
           <Modal.Footer>
