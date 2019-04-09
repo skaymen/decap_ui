@@ -1,90 +1,106 @@
-import React, { Component } from 'react';
-import Platforms from './components/Platforms';
-import {Button, ButtonToolbar} from 'react-bootstrap';
+import React, { Component } from "react";
+import Platforms from "./components/Platforms";
+import { Button, ButtonToolbar } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import './styles/App.css';
-import './styles/bootstrap.min.css'
+import "./styles/App.css";
+import "./styles/bootstrap.min.css";
 
-import Logo from './images/usgs_logo.svg';
-
+import Logo from "./images/usgs_logo.svg";
 
 class App extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
       // the platforms component is loaded by default
-      selectedPage: 'Platforms'
+      selectedPage: "Platforms"
     };
-    this.change = this.change.bind(this)
+    this.change = this.change.bind(this);
   }
 
   change(value) {
-    this.setState({selectedPage: value});
+    this.setState({ selectedPage: value });
   }
 
   render() {
     //display the selected page/component-- only platforms are currently set up
     return (
       <div className="App">
-        <Header selectedPage={this.state.selectedPage} change={this.change}/>
+        <Header selectedPage={this.state.selectedPage} change={this.change} />
         <Body selectedPage={this.state.selectedPage} />
       </div>
-    )
+    );
   }
 }
 
-//separate component for the header. contains 
+//separate component for the header. contains
 class Header extends App {
+  render() {
+    return (
+      <header className="App-header">
+        <img src={Logo} alt="usgs_logo" id="logo" />
 
-  render() { return (
-    <header className="App-header">
+        <div id="title-buttons">
+          <h1 id="decap-title"> DECAP Database Editor </h1>
 
-      <img src={Logo} alt="usgs_logo" id="logo"/>
+          {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
+          <ButtonToolbar id="comp-toolbar">
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
+                this.props.change("Platforms");
+              }}
+            >
+              Platforms
+            </Button>
 
-      <div id="title-buttons">
-        <h1 id="decap-title"> DECAP Database Editor </h1>
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                this.props.change("Sites");
+              }}
+            >
+              Sites
+            </Button>
 
-        {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
-        <ButtonToolbar id="comp-toolbar">
-          <Button variant="outline-primary" onClick = {() => {
-            // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
-            this.props.change('Platforms');
-          }}>Platforms</Button>
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                this.props.change("Configurations");
+              }}
+            >
+              Configurations
+            </Button>
 
-          <Button variant="outline-primary" onClick = {() => {
-            this.props.change('Sites');
-          }}>Sites</Button>
-
-          <Button variant="outline-primary" onClick = {() => {
-            this.props.change('Configurations');
-          }}>Configurations</Button>
-
-          <Button variant="outline-primary" onClick = {() => {
-            this.props.change('Messages')
-          }}>Messages</Button>
-        </ButtonToolbar>
-      </div>
-    </header>)
-}}
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                this.props.change("Messages");
+              }}
+            >
+              Messages
+            </Button>
+          </ButtonToolbar>
+        </div>
+      </header>
+    );
+  }
+}
 
 class Body extends Component {
-
   render() {
-    
-    switch(this.props.selectedPage) {
+    switch (this.props.selectedPage) {
+      case "Platforms":
+        return <Platforms />;
 
-      case 'Platforms':
-        return <Platforms/>;
-
-      case 'Sites':
+      case "Sites":
         return <h2>Sites</h2>;
 
-      case 'Configurations':
+      case "Configurations":
         return <h2>Configurations</h2>;
 
-      case 'Messages':
+      case "Messages":
         return <h2>Messages</h2>;
 
       default:
@@ -100,13 +116,13 @@ const routes = [
     path: "/",
     exact: true,
     sidebar: () => <div>Database Editor</div>,
-    main: () => <App></App>
+    main: () => <App />
   },
   {
     path: "/page2",
     sidebar: () => <div>Page 2</div>,
     main: () => <h2>Page 2</h2>
-  },
+  }
 ];
 
 function Sidebar() {
