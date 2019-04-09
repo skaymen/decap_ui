@@ -1,117 +1,113 @@
-import React, { Component } from 'react';
-import Platforms from './components/Platforms';
-import {Button, ButtonToolbar} from 'react-bootstrap';
+import React, { Component } from "react";
+import Platforms from "./components/Platforms";
+import { Button, ButtonToolbar } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import './styles/App.css';
-import './styles/bootstrap.min.css'
+import "./styles/App.css";
+import "./styles/bootstrap.min.css";
 
-import Logo from './images/usgs_logo.svg';
-
+import Logo from "./images/usgs_logo.svg";
 
 class App extends Component {
-  
   constructor(props) {
     super(props);
     this.state = {
       // the platforms component is loaded by default
-      selectedPage: 'Platforms'
+      selectedPage: "Platforms"
     };
-    this.change = this.change.bind(this)
+    this.change = this.change.bind(this);
   }
 
   change(value) {
-    this.setState({selectedPage: value});
+    this.setState({ selectedPage: value });
   }
 
-
   render() {
-
-    //TODO: these if statements are probably not the best way to handle this
-    // best practice seems to be mounting / unmounting components based on state change
-
     //display the selected page/component-- only platforms are currently set up
-    if (this.state.selectedPage === 'Platforms') {
-      return (
-        <div className="App">
-          {/* pass in selected page and change function to the header component */}
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-          <Platforms />
-        </div>
-      );
-    }
-
-    else if (this.state.selectedPage === 'Sites') {
-      return ( 
-        <div className="App">
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-          <h2> Sites</h2>
-        </div>
-      );
-    }
-
-    else if (this.state.selectedPage === 'Configurations') {
-      return (
-        <div className="App">
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-          <h2> Configurations</h2>
-        </div>
-      );
-    }
-
-    else if (this.state.selectedPage === 'Messages') {
-      return (
-        <div className="App">
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-          <h2> Messages</h2>
-        </div>
-      );
-    }
-
-    //most likely unreachable edgecase
-    else {
-      return (
-        <div className="App">
-          <Header selectedPage={this.state.selectedPage} change={this.change}/>
-        </div>
-      );
-    }
+    return (
+      <div className="App">
+        <Header selectedPage={this.state.selectedPage} change={this.change} />
+        <Body selectedPage={this.state.selectedPage} />
+      </div>
+    );
   }
 }
 
-//separate component for the header. contains 
+//separate component for the header. contains
 class Header extends App {
+  render() {
+    return (
+      <header className="App-header">
+        <img src={Logo} alt="usgs_logo" id="logo" />
 
-  render() { return (
-    <header className="App-header">
+        <div id="title-buttons">
+          <h1 id="decap-title"> DECAP Database Editor </h1>
 
-      <img src={Logo} alt="usgs_logo" id="logo"/>
+          {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
+          <ButtonToolbar id="comp-toolbar">
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
+                this.props.change("Platforms");
+              }}
+            >
+              Platforms
+            </Button>
 
-      <div id="title-buttons">
-        <h1 id="decap-title"> DECAP Database Editor </h1>
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                this.props.change("Sites");
+              }}
+            >
+              Sites
+            </Button>
 
-        {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
-        <ButtonToolbar>
-          <Button variant="outline-primary" onClick = {() => {
-            // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
-            this.props.change('Platforms');
-          }}>Platforms</Button>
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                this.props.change("Configurations");
+              }}
+            >
+              Configurations
+            </Button>
 
-          <Button variant="outline-primary" onClick = {() => {
-            this.props.change('Sites');
-          }}>Sites</Button>
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                this.props.change("Messages");
+              }}
+            >
+              Messages
+            </Button>
+          </ButtonToolbar>
+        </div>
+      </header>
+    );
+  }
+}
 
-          <Button variant="outline-primary" onClick = {() => {
-            this.props.change('Configurations');
-          }}>Configurations</Button>
+class Body extends Component {
+  render() {
+    switch (this.props.selectedPage) {
+      case "Platforms":
+        return <Platforms />;
 
-          <Button variant="outline-primary" onClick = {() => {
-            this.props.change('Messages')
-          }}>Messages</Button>
-        </ButtonToolbar>
-      </div>
-    </header>)
-}}
+      case "Sites":
+        return <h2>Sites</h2>;
+
+      case "Configurations":
+        return <h2>Configurations</h2>;
+
+      case "Messages":
+        return <h2>Messages</h2>;
+
+      default:
+        return null;
+    }
+  }
+}
 
 // This is code for making the app multi-page. For now, we are simply adding and removing components on a single page
 
@@ -120,13 +116,13 @@ const routes = [
     path: "/",
     exact: true,
     sidebar: () => <div>Database Editor</div>,
-    main: () => <App></App>
+    main: () => <App />
   },
   {
     path: "/page2",
     sidebar: () => <div>Page 2</div>,
     main: () => <h2>Page 2</h2>
-  },
+  }
 ];
 
 function Sidebar() {
@@ -141,12 +137,17 @@ function Sidebar() {
           }}
         >
           <ul style={{ listStyleType: "none", padding: 0 }} id="sidebar-list">
-            <li>
-              <Link to="/">Database Editor</Link>
-            </li>
-            <li>
-              <Link to="/page2">Page 2</Link>
-            </li>
+            <Link to="/">
+              <Button variant="outline-primary" id="sidebar-button">
+                Database Editor
+              </Button>
+            </Link>
+
+            <Link to="/page2">
+              <Button variant="outline-primary" id="sidebar-button">
+                Page 2
+              </Button>
+            </Link>
           </ul>
 
           {routes.map((route, index) => (

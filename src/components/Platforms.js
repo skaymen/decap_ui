@@ -252,6 +252,7 @@ class Platforms extends Component {
         <ButtonToolbar id="buttonbar">
           <Button
             variant="primary"
+            id="platform-button"
             onClick={() => {
               if (this.state.selectedIndex >= 0) {
                 //call the function to display the data modal
@@ -266,6 +267,7 @@ class Platforms extends Component {
 
           <Button
             variant="primary"
+            id="platform-button"
             onClick={() => {
               alert("Create new stuff goes here");
             }}
@@ -275,6 +277,7 @@ class Platforms extends Component {
 
           <Button
             variant="primary"
+            id="platform-button"
             onClick={() => {
               if (this.state.selectedIndex) {
                 alert("copy row " + this.state.selectedIndex);
@@ -288,6 +291,7 @@ class Platforms extends Component {
 
           <Button
             variant="danger"
+            id="platform-button"
             onClick={() => {
               if (this.state.selectedIndex) {
                 alert("delete row " + this.state.selectedIndex);

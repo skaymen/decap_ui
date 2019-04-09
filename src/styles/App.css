@@ -8,33 +8,23 @@
   min-height: 10vh;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
 }
 
-/* TODO: Absolutely no idea what's going on here, but I cannot get the logo to stick on the left
-while the title and buttons are centered. Leaving everything centered for now */
-
-/* #logo {
-  margin: 1vh 1vh;
-  justify-content: flex-start;
-  text-align: left;
-  -webkit-justify-content: flex-start;
-  -webkit-align-items: flex-start;
-  align-items: flex-start;
-  display: flex;
+#logo {
+  margin-left: 2vh;
 }
 
-div#title-buttons {
-  align-items: right !important;
-  justify-content: right !important;
-}  */
+#title-buttons {
+  width: 75%;
+}
 
-/* #logo {
-  align-self: flex-start;
-} */
+#comp-toolbar {
+  justify-content: center;
+}
 
 .App-link {
   color: #61dafb;
@@ -44,18 +34,12 @@ div#title-buttons {
   margin: 1vh 1vh;
 }
 
-/* .btn-toolbar {
-  align-items: center;
-  align-self: center;
-  align-content: center;
-  justify-content: center;
-  justify-self: center;
-  justify-items: center;
-  text-align: center;
-} */
-
 #sidebar-list {
   margin-top: 2vh;
+}
+
+#sidebar-button {
+  width: 90%;
 }
 
 @keyframes App-logo-spin {
