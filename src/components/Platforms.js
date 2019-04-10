@@ -3,10 +3,10 @@ import ReactTable from "react-table";
 import {
   Button,
   ButtonToolbar,
-  Modal,
   Dropdown,
   DropdownButton
 } from "react-bootstrap";
+import Window from "./Window.js";
 
 import "../styles/App.css";
 import "../styles/Platforms.css";
@@ -49,7 +49,7 @@ class Platforms extends Component {
 
     //bind functions to show and close the modal
     this.handleShow = this.handleShow.bind(this);
-    this.handleClose = this.handleClose.bind(this);
+    // this.handleClose = this.handleClose.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
 
     this.state = {
@@ -58,17 +58,22 @@ class Platforms extends Component {
       selectedRow: {},
       search: "",
       show: false,
-      filterState: "All"
+      filterState: "All",
     };
   }
 
-  handleClose() {
-    this.setState({ show: false });
-  }
+  // handleClose() {
+  //   this.setState({ show: false });
+  // }
 
   handleShow() {
     this.setState({ show: true });
+    this.setState({ key: Math.random() });
+    // this.refreshWindow();
   }
+
+  // refreshWindow = () => 
+  //   this.setState({show: !this.state.show});
 
   changeFilter(newState) {
     this.setState({ filterState: newState });
@@ -232,35 +237,7 @@ class Platforms extends Component {
           </Button>
         </ButtonToolbar>
 
-        {/* this is a modal, or pop-up window, that displays data from a selected row on clicking the "open" button
-        we are using a modal here so we can have a pop up window instead of a new component */}
-        <Modal show={this.state.show} onHide={this.handleClose}>
-          <Modal.Header closeButton>
-            <Modal.Title>
-              {this.state.selectedRow.row === undefined
-                ? null
-                : this.state.selectedRow.row.platform}
-            </Modal.Title>
-          </Modal.Header>
-
-          <Modal.Body>
-            {this.state.selectedRow.row === undefined ? null : (
-              <React.Fragment>
-                <p>Agency: {this.state.selectedRow.row.agency}</p>
-                <p>Transport-ID: {this.state.selectedRow.row.transportid}</p>
-                <p>Config: {this.state.selectedRow.row.config}</p>
-                <p>Expiration: {this.state.selectedRow.row.expiration}</p>
-                <p>Description: {this.state.selectedRow.row.description}</p>
-              </React.Fragment>
-            )}
-          </Modal.Body>
-
-          <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleClose}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <Window show={this.state.show} selectedRow={this.state.selectedRow} firstCol={this.state.selectedRow.platform} key={this.state.key}/>
       </div>
     );
   }
