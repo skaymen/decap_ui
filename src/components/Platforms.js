@@ -49,12 +49,10 @@ class Platforms extends Component {
 
     //bind functions to show and close the modal
     this.handleShow = this.handleShow.bind(this);
-    // this.handleClose = this.handleClose.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
 
     this.state = {
       selectedIndex: -1,
-      //dummy data so we don't have an error with the modal-- probably best to get rid of this somehow, but not sure how
       selectedRow: {},
       search: "",
       show: false,
@@ -62,18 +60,10 @@ class Platforms extends Component {
     };
   }
 
-  // handleClose() {
-  //   this.setState({ show: false });
-  // }
-
   handleShow() {
     this.setState({ show: true });
     this.setState({ key: Math.random() });
-    // this.refreshWindow();
   }
-
-  // refreshWindow = () => 
-  //   this.setState({show: !this.state.show});
 
   changeFilter(newState) {
     this.setState({ filterState: newState });
