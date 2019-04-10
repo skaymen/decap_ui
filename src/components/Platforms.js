@@ -154,8 +154,8 @@ class Platforms extends Component {
 
           <div id="filter">
             {/* dropdown buttons for selecting what to filter by */}
-            <DropdownButton id="filter-dropdown" title={this.state.filterState}>
-              <Dropdown.Item
+            {/* <DropdownButton id="filter-dropdown" title={this.state.filterState}> */}
+              {/* <Dropdown.Item
                 onClick={() => {
                   this.changeFilter("Platform");
                 }}
@@ -204,8 +204,9 @@ class Platforms extends Component {
                 }}
               >
                 All
-              </Dropdown.Item>
-            </DropdownButton>
+              </Dropdown.Item> */}
+              <DropdownItems columns={columns} filterState={this.state.filterState} changeFilter={this.changeFilter}/>
+            {/* </DropdownButton> */}
             Filter:{" "}
             <input
               value={this.state.search}
@@ -327,6 +328,27 @@ class Platforms extends Component {
         </Modal>
       </div>
     );
+  }
+}
+
+class DropdownItems extends Component {
+
+  
+  render() {
+    this.props.changeFilter("xxx");
+    var items = this.props.columns.map(function(column) {
+      return <Dropdown.Item
+      onClick={() => {
+        this.props.changeFilter(column.Header);
+      }}
+    >
+    {column.Header}
+        </Dropdown.Item>;
+    });
+
+   
+    return <DropdownButton id="filter-dropdown" title={this.props.filterState}>{items} </DropdownButton>
+    
   }
 }
 
