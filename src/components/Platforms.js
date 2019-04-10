@@ -50,6 +50,7 @@ class Platforms extends Component {
     //bind functions to show and close the modal
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.changeFilter = this.changeFilter.bind(this);
 
     this.state = {
       selectedIndex: -1,
@@ -118,50 +119,12 @@ class Platforms extends Component {
           <h2 id="title"> Platforms </h2>
 
           <div id="filter">
-            {/* dropdown buttons for selecting what to filter by */}
-            {/* <DropdownButton id="filter-dropdown" title={this.state.filterState}> */}
-              {/* <Dropdown.Item
-                onClick={() => {
-                  this.changeFilter("Platform");
-                }}
-              >
-                Platform
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  this.changeFilter("Agency");
-                }}
-              >
-                Agency
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  this.changeFilter("Transport-ID");
-                }}
-              >
-                Transport-ID
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  this.changeFilter("Config");
-                }}
-              >
-                Config
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  this.changeFilter("Expiration");
-                }}
-              >
-                Expiration
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={() => {
-                  this.changeFilter("Description");
-                }}
-              >
-                Description
-              </Dropdown.Item>
+            <DropdownButton id="filter-dropdown" title={this.state.filterState}>
+              <DropdownItems
+                columns={columns}
+                filterState={this.state.filterState}
+                changeFilter={this.changeFilter}
+              />
               <Dropdown.Divider />
               <Dropdown.Item
                 onClick={() => {
@@ -169,9 +132,8 @@ class Platforms extends Component {
                 }}
               >
                 All
-              </Dropdown.Item> */}
-              <DropdownItems columns={columns} filterState={this.state.filterState} changeFilter={this.changeFilter}/>
-            {/* </DropdownButton> */}
+              </Dropdown.Item>
+            </DropdownButton>
             Filter:{" "}
             <input
               value={this.state.search}
@@ -304,24 +266,23 @@ class Platforms extends Component {
   }
 }
 
-class DropdownItems extends Component {
-
-  
+class DropdownItems extends Platforms {
   render() {
-    this.props.changeFilter("xxx");
+    var changeFilter = this.props.changeFilter;
+
     var items = this.props.columns.map(function(column) {
-      return <Dropdown.Item
-      onClick={() => {
-        this.props.changeFilter(column.Header);
-      }}
-    >
-    {column.Header}
-        </Dropdown.Item>;
+      return (
+        <Dropdown.Item
+          onClick={() => {
+            changeFilter(column.Header);
+          }}
+        >
+          {column.Header}
+        </Dropdown.Item>
+      );
     });
 
-   
-    return <DropdownButton id="filter-dropdown" title={this.props.filterState}>{items} </DropdownButton>
-    
+    return items;
   }
 }
 
