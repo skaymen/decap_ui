@@ -23,10 +23,6 @@ class Window extends Component {
 
   render() {
 
-    var items = this.props.selectedRow.row.map(function(item) {
-      return item;
-    })
-
     return (
       <Modal show={this.state.show} onHide={this.handleClose}>
         <Modal.Header closeButton>
