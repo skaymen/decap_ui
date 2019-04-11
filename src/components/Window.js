@@ -22,26 +22,27 @@ class Window extends Component {
   }
 
   render() {
+    var row = this.props.selectedRow.row;
+
+    var data = this.props.displayData.map(function(column) {
+      return (
+        <p>
+          {column.title}: {column.value}
+        </p>
+      );
+    });
 
     return (
       <Modal show={this.state.show} onHide={this.handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>
-            {this.props.selectedRow.row === undefined
-              ? null
-              : this.props.selectedRow.row.platform}
+            {row === undefined ? null : this.props.displayData[0].value}
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
-          {this.props.selectedRow.row === undefined ? null : (
-            <React.Fragment>
-              <p>Agency: {this.props.selectedRow.row.agency}</p>
-              <p>Transport-ID: {this.props.selectedRow.row.transportid}</p>
-              <p>Config: {this.props.selectedRow.row.config}</p>
-              <p>Expiration: {this.props.selectedRow.row.expiration}</p>
-              <p>Description: {this.props.selectedRow.row.description}</p>
-            </React.Fragment>
+          {row === undefined ? null : (
+            <React.Fragment>{data}</React.Fragment>
           )}
         </Modal.Body>
 
