@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactDOM from "react-dom";
 import ReactTable from "react-table";
 import {
   Button,
@@ -58,6 +59,8 @@ class Platforms extends Component {
       show: false,
       filterState: "All"
     };
+
+    this.windowNode = document.createElement('div');
   }
 
   handleShow() {
@@ -71,6 +74,42 @@ class Platforms extends Component {
 
   render() {
     let data = platformdata;
+
+    //create the pop-up window in a portal attached to its own node
+    var window = ReactDOM.createPortal(<Window
+      show={this.state.show}
+      selectedRow={this.state.selectedRow}
+      firstCol={this.state.selectedRow.platform}
+      key={this.state.key}
+      displayData={
+        this.state.selectedRow.row === undefined
+          ? [{ title: "", value: "" }]
+          : [
+              {
+                title: "Platform",
+                value: this.state.selectedRow.row.platform
+              },
+              { title: "Agency",
+                value: this.state.selectedRow.row.agency
+              },
+              {
+                title: "Transport-ID",
+                value: this.state.selectedRow.row.transportid
+              },
+              { title: "Config",
+                value: this.state.selectedRow.row.config
+              },
+              {
+                title: "Expiration",
+                value: this.state.selectedRow.row.expiration
+              },
+              {
+                title: "Description",
+                value: this.state.selectedRow.row.description
+              }
+            ]
+      }
+    />, this.windowNode)
     // define the filter functionality for the table-- which column is searched depends on what is selected
     if (this.state.search) {
       data = data.filter(row => {
@@ -227,49 +266,20 @@ class Platforms extends Component {
           </Button>
         </ButtonToolbar>
 
-        <Window
-          show={this.state.show}
-          selectedRow={this.state.selectedRow}
-          firstCol={this.state.selectedRow.platform}
-          key={this.state.key}
-          displayData={
-            this.state.selectedRow.row === undefined
-              ? [{ title: "", value: "" }]
-              : [
-                  {
-                    title: "Platform",
-                    value: this.state.selectedRow.row.platform
-                  },
-                  { title: "Agency",
-                    value: this.state.selectedRow.row.agency
-                  },
-                  {
-                    title: "Transport-ID",
-                    value: this.state.selectedRow.row.transportid
-                  },
-                  { title: "Config",
-                    value: this.state.selectedRow.row.config
-                  },
-                  {
-                    title: "Expiration",
-                    value: this.state.selectedRow.row.expiration
-                  },
-                  {
-                    title: "Description",
-                    value: this.state.selectedRow.row.description
-                  }
-                ]
-          }
-        />
+        {window}
+        
       </div>
+      
     );
   }
 }
 
+//generic component for Dropdown items
 class DropdownItems extends Platforms {
   render() {
     var changeFilter = this.props.changeFilter;
 
+    //map each column header to its change function
     var items = this.props.columns.map(function(column) {
       return (
         <Dropdown.Item
