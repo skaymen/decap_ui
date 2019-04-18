@@ -51,6 +51,7 @@ class Platforms extends Component {
     //bind functions to show and close the modal
     this.handleShow = this.handleShow.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
+    this.handleClosePlatformDisplay = this.handleClosePlatformDisplay.bind(this);
 
     this.state = {
       selectedIndex: -1,
@@ -71,6 +72,10 @@ class Platforms extends Component {
 
     // window.onload = function() {
     // }
+  }
+
+  handleClosePlatformDisplay() {
+    this.setState({ showPlatformDisplay: false });
   }
 
   changeFilter(newState) {
@@ -285,7 +290,7 @@ class Platforms extends Component {
 
         {window}
         {this.state.showPlatformDisplay ? (
-          <PlatformDisplay
+          <PlatformDisplay close={this.handleClosePlatformDisplay}
             displayData={
               this.state.selectedRow.row === undefined
                 ? [{ title: "", value: "" }]
@@ -347,6 +352,14 @@ class DropdownItems extends Platforms {
 }
 
 class PlatformDisplay extends Platforms {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      showPlatformDisplay: this.props.showPlatformDisplay
+    };
+  }
+
   render() {
     var data = this.props.displayData.map(function(column) {
       return (
@@ -360,6 +373,15 @@ class PlatformDisplay extends Platforms {
       <div id="platform-display">
         <h3 id="display-title">{this.props.displayData[0].value}</h3>
         {data}
+        <Button
+            variant="secondary"
+            id="close-button"
+            onClick={() => {
+              this.props.close();
+            }}
+          >
+            Close
+          </Button>
       </div>
     );
   }
