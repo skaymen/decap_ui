@@ -40,3 +40,16 @@
     height: 4vh;
     width: 10vh;
   }
+
+  #platform-display {
+    margin: 3vh 3vh;
+    text-align: left;
+    border: 1px solid;
+    padding: 1vh 1vh;
+    background-color: lightblue;
+    width: 50vh;
+  }
+
+  #display-title {
+    margin-bottom: 2vh;
+  }

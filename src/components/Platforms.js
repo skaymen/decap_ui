@@ -57,59 +57,76 @@ class Platforms extends Component {
       selectedRow: {},
       search: "",
       show: false,
-      filterState: "All"
+      filterState: "All",
+      showPlatformDisplay: false
     };
 
-    this.windowNode = document.createElement('div');
+    this.windowNode = document.createElement("div");
   }
 
   handleShow() {
     this.setState({ show: true });
     this.setState({ key: Math.random() });
+    this.setState({ showPlatformDisplay: true });
+
+    // window.onload = function() {
+    // }
   }
 
   changeFilter(newState) {
     this.setState({ filterState: newState });
   }
 
+  scrollToBottom = () => {
+    var pfdis = document.getElementById("page-bottom");
+    pfdis.scrollIntoView({behavior: "smooth", block: "end"});
+  }
+  
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+  
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   render() {
     let data = platformdata;
 
     //create the pop-up window in a portal attached to its own node
-    var window = ReactDOM.createPortal(<Window
-      show={this.state.show}
-      selectedRow={this.state.selectedRow}
-      firstCol={this.state.selectedRow.platform}
-      key={this.state.key}
-      displayData={
-        this.state.selectedRow.row === undefined
-          ? [{ title: "", value: "" }]
-          : [
-              {
-                title: "Platform",
-                value: this.state.selectedRow.row.platform
-              },
-              { title: "Agency",
-                value: this.state.selectedRow.row.agency
-              },
-              {
-                title: "Transport-ID",
-                value: this.state.selectedRow.row.transportid
-              },
-              { title: "Config",
-                value: this.state.selectedRow.row.config
-              },
-              {
-                title: "Expiration",
-                value: this.state.selectedRow.row.expiration
-              },
-              {
-                title: "Description",
-                value: this.state.selectedRow.row.description
-              }
-            ]
-      }
-    />, this.windowNode)
+    var window = ReactDOM.createPortal(
+      <Window
+        show={this.state.show}
+        selectedRow={this.state.selectedRow}
+        firstCol={this.state.selectedRow.platform}
+        key={this.state.key}
+        displayData={
+          this.state.selectedRow.row === undefined
+            ? [{ title: "", value: "" }]
+            : [
+                {
+                  title: "Platform",
+                  value: this.state.selectedRow.row.platform
+                },
+                { title: "Agency", value: this.state.selectedRow.row.agency },
+                {
+                  title: "Transport-ID",
+                  value: this.state.selectedRow.row.transportid
+                },
+                { title: "Config", value: this.state.selectedRow.row.config },
+                {
+                  title: "Expiration",
+                  value: this.state.selectedRow.row.expiration
+                },
+                {
+                  title: "Description",
+                  value: this.state.selectedRow.row.description
+                }
+              ]
+        }
+      />,
+      this.windowNode
+    );
     // define the filter functionality for the table-- which column is searched depends on what is selected
     if (this.state.search) {
       data = data.filter(row => {
@@ -267,9 +284,42 @@ class Platforms extends Component {
         </ButtonToolbar>
 
         {window}
-        
+        {this.state.showPlatformDisplay ? (
+          <PlatformDisplay
+            displayData={
+              this.state.selectedRow.row === undefined
+                ? [{ title: "", value: "" }]
+                : [
+                    {
+                      title: "Platform",
+                      value: this.state.selectedRow.row.platform
+                    },
+                    {
+                      title: "Agency",
+                      value: this.state.selectedRow.row.agency
+                    },
+                    {
+                      title: "Transport-ID",
+                      value: this.state.selectedRow.row.transportid
+                    },
+                    {
+                      title: "Config",
+                      value: this.state.selectedRow.row.config
+                    },
+                    {
+                      title: "Expiration",
+                      value: this.state.selectedRow.row.expiration
+                    },
+                    {
+                      title: "Description",
+                      value: this.state.selectedRow.row.description
+                    }
+                  ]
+            }
+          />
+        ) : null}
+        <div id="page-bottom"/>
       </div>
-      
     );
   }
 }
@@ -293,6 +343,25 @@ class DropdownItems extends Platforms {
     });
 
     return items;
+  }
+}
+
+class PlatformDisplay extends Platforms {
+  render() {
+    var data = this.props.displayData.map(function(column) {
+      return (
+        <p key={column.title + column.value}>
+          <b>{column.title}</b>: {column.value}
+        </p>
+      );
+    });
+
+    return (
+      <div id="platform-display">
+        <h3 id="display-title">{this.props.displayData[0].value}</h3>
+        {data}
+      </div>
+    );
   }
 }
 

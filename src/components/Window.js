@@ -31,7 +31,7 @@ class Window extends Component {
     var data = this.props.displayData.map(function(column) {
       return (
         <p key={column.title+column.value}>
-          {column.title}: {column.value}
+         <b>{column.title}</b>: {column.value}
         </p>
       );
     });
@@ -41,7 +41,7 @@ class Window extends Component {
         <Modal.Header closeButton>
         {/* title is the first value given */}
           <Modal.Title>
-            {row === undefined ? null : this.props.displayData[0].value}
+            {row === undefined ? null : <b>{this.props.displayData[0].value}</b>}
           </Modal.Title>
         </Modal.Header>
 
