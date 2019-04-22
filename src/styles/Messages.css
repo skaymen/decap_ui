@@ -1,0 +1,30 @@
+
+
+#top-boxes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.text-box {
+    margin: 2vh 2vh;
+    padding: 1vh;
+}
+
+#message-data-box {
+    text-align: center;
+}
+
+#message-data {
+    height: 30vh;
+    border: 1px solid;
+    margin: 2vh 2vh;
+    width: 80%;
+    display: inline-block;
+}
+
+.message-button {
+    height: 5vh;
+    width: 5vh;
+    margin: 1vh 1vh;
+}

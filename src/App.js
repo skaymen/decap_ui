@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Platforms from "./components/Platforms";
+import Messages from "./components/Messages";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -101,7 +102,7 @@ class Body extends Component {
         return <h2>Configurations</h2>;
 
       case "Messages":
-        return <h2>Messages</h2>;
+        return <Messages/>
 
       default:
         return null;

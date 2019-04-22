@@ -24,14 +24,13 @@ class Window extends Component {
   }
 
   render() {
-
     var row = this.props.selectedRow.row;
 
     //create a line for each column title and the value that goes in
     var data = this.props.displayData.map(function(column) {
       return (
-        <p key={column.title+column.value}>
-         <b>{column.title}</b>: {column.value}
+        <p key={column.title + column.value}>
+          <b>{column.title}</b>: {column.value}
         </p>
       );
     });
@@ -39,17 +38,17 @@ class Window extends Component {
     return (
       <Modal show={this.state.show} onHide={this.handleClose}>
         <Modal.Header closeButton>
-        {/* title is the first value given */}
+          {/* title is the first value given */}
           <Modal.Title>
-            {row === undefined ? null : <b>{this.props.displayData[0].value}</b>}
+            {row === undefined ? null : (
+              <b>{this.props.displayData[0].value}</b>
+            )}
           </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           {/* list all the data */}
-          {row === undefined ? null : (
-            <React.Fragment>{data}</React.Fragment>
-          )}
+          {row === undefined ? null : <React.Fragment>{data}</React.Fragment>}
         </Modal.Body>
 
         <Modal.Footer>

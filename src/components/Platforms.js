@@ -51,7 +51,9 @@ class Platforms extends Component {
     //bind functions to show and close the modal
     this.handleShow = this.handleShow.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
-    this.handleClosePlatformDisplay = this.handleClosePlatformDisplay.bind(this);
+    this.handleClosePlatformDisplay = this.handleClosePlatformDisplay.bind(
+      this
+    );
 
     this.state = {
       selectedIndex: -1,
@@ -84,13 +86,13 @@ class Platforms extends Component {
 
   scrollToBottom = () => {
     var pfdis = document.getElementById("page-bottom");
-    pfdis.scrollIntoView({behavior: "smooth", block: "end"});
-  }
-  
+    pfdis.scrollIntoView({ behavior: "smooth", block: "end" });
+  };
+
   componentDidMount() {
     this.scrollToBottom();
   }
-  
+
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -290,40 +292,43 @@ class Platforms extends Component {
 
         {window}
         {this.state.showPlatformDisplay ? (
-          <PlatformDisplay close={this.handleClosePlatformDisplay}
-            displayData={
-              this.state.selectedRow.row === undefined
-                ? [{ title: "", value: "" }]
-                : [
-                    {
-                      title: "Platform",
-                      value: this.state.selectedRow.row.platform
-                    },
-                    {
-                      title: "Agency",
-                      value: this.state.selectedRow.row.agency
-                    },
-                    {
-                      title: "Transport-ID",
-                      value: this.state.selectedRow.row.transportid
-                    },
-                    {
-                      title: "Config",
-                      value: this.state.selectedRow.row.config
-                    },
-                    {
-                      title: "Expiration",
-                      value: this.state.selectedRow.row.expiration
-                    },
-                    {
-                      title: "Description",
-                      value: this.state.selectedRow.row.description
-                    }
-                  ]
-            }
-          />
+          <div id="platform-display-container">
+            <PlatformDisplay
+              close={this.handleClosePlatformDisplay}
+              displayData={
+                this.state.selectedRow.row === undefined
+                  ? [{ title: "", value: "" }]
+                  : [
+                      {
+                        title: "Platform",
+                        value: this.state.selectedRow.row.platform
+                      },
+                      {
+                        title: "Agency",
+                        value: this.state.selectedRow.row.agency
+                      },
+                      {
+                        title: "Transport-ID",
+                        value: this.state.selectedRow.row.transportid
+                      },
+                      {
+                        title: "Config",
+                        value: this.state.selectedRow.row.config
+                      },
+                      {
+                        title: "Expiration",
+                        value: this.state.selectedRow.row.expiration
+                      },
+                      {
+                        title: "Description",
+                        value: this.state.selectedRow.row.description
+                      }
+                    ]
+              }
+            />
+          </div>
         ) : null}
-        <div id="page-bottom"/>
+        <div id="page-bottom" />
       </div>
     );
   }
@@ -352,7 +357,6 @@ class DropdownItems extends Platforms {
 }
 
 class PlatformDisplay extends Platforms {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -374,14 +378,14 @@ class PlatformDisplay extends Platforms {
         <h3 id="display-title">{this.props.displayData[0].value}</h3>
         {data}
         <Button
-            variant="secondary"
-            id="close-button"
-            onClick={() => {
-              this.props.close();
-            }}
-          >
-            Close
-          </Button>
+          variant="secondary"
+          id="close-button"
+          onClick={() => {
+            this.props.close();
+          }}
+        >
+          Close
+        </Button>
       </div>
     );
   }

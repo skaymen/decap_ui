@@ -41,6 +41,10 @@
     width: 10vh;
   }
 
+  #platform-display-containter {
+    text-align: center;
+  }
+
   #platform-display {
     margin: 3vh 3vh;
     text-align: left;
@@ -48,6 +52,7 @@
     padding: 1vh 1vh;
     background-color: lightblue;
     width: 50vh;
+    display:inline-block;
   }
 
   #display-title {
