@@ -27,3 +27,9 @@
     width: 3vh;
     margin: 1vh 1vh;
 }
+
+#refresh {
+    height: 2vh;
+    width: 2vw;
+    margin-left: 5vw;
+}
