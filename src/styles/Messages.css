@@ -16,15 +16,14 @@
 }
 
 #message-data {
-    height: 30vh;
-    border: 1px solid;
+    height: auto;
     margin: 2vh 2vh;
     width: 80%;
     display: inline-block;
 }
 
-.message-button {
-    height: 5vh;
-    width: 5vh;
+.message-icon {
+    height: 3vh;
+    width: 3vh;
     margin: 1vh 1vh;
 }
