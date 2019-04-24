@@ -1,0 +1,26 @@
+[
+    {
+        "message_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+        "decoded_data": "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+    },
+    {
+        "message_text": "Arcu risus quis varius quam quisque id diam",
+        "decoded_data": "Diam volutpat commodo sed egestas egestas fringilla phasellus"
+    },
+    {
+        "message_text": "Tincidunt ornare massa eget egestas purus",
+        "decoded_data": "Enim diam vulputate ut pharetra"
+    },
+    {
+        "message_text": "estibulum rhoncus est pellentesque elit",
+        "decoded_data": "Morbi tristique senectus et netus et malesuada fames"
+    },
+    {
+        "message_text": "In hendrerit gravida rutrum quisque non tellus orci ac",
+        "decoded_data": "Vulputate odio ut enim blandit volutpat"
+    },
+    {
+        "message_text": "Est lorem ipsum dolor sit amet consectetur adipiscing",
+        "decoded_data": " Enim nec dui nunc mattis"
+    }
+]

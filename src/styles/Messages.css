@@ -15,13 +15,6 @@
     text-align: center;
 }
 
-#message-data {
-    height: auto;
-    margin: 2vh 2vh;
-    width: 80%;
-    display: inline-block;
-}
-
 .message-icon {
     height: 3vh;
     width: 3vh;
@@ -31,4 +24,8 @@
 #refresh {
     height: 2vh;
     width: 2vw;
+}
+
+#data-display {
+    display: inline-block;
 }
