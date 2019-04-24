@@ -8,15 +8,19 @@ import Forward from "../images/skipforward.svg";
 import Back from "../images/skipback.svg";
 import Refresh from "../images/update-arrows.svg";
 
+//messaging component for the database editor
 class Messages extends Component {
   constructor(props) {
     super(props);
     this.skipForward = this.skipForward.bind(this);
     this.skipBack = this.skipBack.bind(this);
     this.decode = this.decode.bind(this);
+    this.refresh = this.refresh.bind(this);
 
     this.state = {
+      //keep track of which message we are on
       index: 0,
+      //example data to use for prototype. actual data will come from backend when implemented
       demo_data: {
         source: "Water Science Center",
         location: "17589_E76",
@@ -34,26 +38,37 @@ class Messages extends Component {
   }
 
   skipForward() {
+    //move to the next element in the message list, or start over if at end
     let i = this.state.index;
     i < this.state.demo_data.message_text.length - 1 ? (i += 1) : (i = 0);
     this.setState({ index: i });
   }
 
   skipBack() {
+    //move to previous element, or final element if at beginning
     let i = this.state.index;
     i > 0 ? (i -= 1) : (i = this.state.demo_data.message_text.length - 1);
     this.setState({ index: i });
   }
 
   decode() {
+    //replace a given message with "decoded." should be replaced with something that makes more sense
     let data = this.state.demo_data;
     data.message_text[this.state.index] = "decoded!";
+    this.setState({ demo_data: data });
+  }
+
+  refresh() {
+    //not actually sure what should happen here. replace this code as needed
+    let data = this.state.demo_data;
+    data.message_text[this.state.index] = "refreshed!";
     this.setState({ demo_data: data });
   }
 
   render() {
     return (
       <div id="messages">
+      {/* list relevant informaiton along the top */}
         <div id="top-boxes">
           <div className="text-box">
             <h3>Message Source</h3>
@@ -75,13 +90,18 @@ class Messages extends Component {
         <div id="message-data-box">
           <div id="message-data">
             <h3>
-              
+              {/* print message data, page number, etc */}
               Message Data - {this.state.index + 1} of{" "}
               {this.state.demo_data.message_text.length}
-              <img src={Refresh} alt="refresh" id="refresh"/>
+              {/* <button id="refresh-button" onClick={this.refresh}>
+                <img src={Refresh} alt="refresh" id="refresh"/>
+              </button> */}
+              <input type="image" src={Refresh} id="refresh" alt="refresh" onClick={this.refresh}/>
             </h3>
             <p>{this.state.demo_data.message_text[this.state.index]}</p>
           </div>
+
+          {/* buttons for skip and play */}
           <div id="buttons">
             <Button
               variant="outline-info"
