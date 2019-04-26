@@ -23,20 +23,20 @@ const columns = [
     accessor: "platform" // String-based value accessors!
   },
   {
-    Header: "Agency",
-    accessor: "agency"
+    Header: "Location Number",
+    accessor: "location_number"
   },
   {
-    Header: "Transport-ID",
-    accessor: "transportid"
+    Header: "Location Name",
+    accessor: "location_name"
   },
   {
-    Header: "Config",
-    accessor: "config"
+    Header: "Active",
+    accessor: "active"
   },
   {
-    Header: "Expiration",
-    accessor: "expiration"
+    Header: "Transmission ID",
+    accessor: "transmission_id"
   },
   {
     Header: "Description",
@@ -115,15 +115,15 @@ class Platforms extends Component {
                   title: "Platform",
                   value: this.state.selectedRow.row.platform
                 },
-                { title: "Agency", value: this.state.selectedRow.row.agency },
+                { title: "Location Number", value: this.state.selectedRow.row.location_number },
                 {
-                  title: "Transport-ID",
-                  value: this.state.selectedRow.row.transportid
+                  title: "Location Name",
+                  value: this.state.selectedRow.row.location_name
                 },
-                { title: "Config", value: this.state.selectedRow.row.config },
+                { title: "Active", value: this.state.selectedRow.row.active },
                 {
-                  title: "Expiration",
-                  value: this.state.selectedRow.row.expiration
+                  title: "Transmission ID",
+                  value: this.state.selectedRow.row.transmission_id
                 },
                 {
                   title: "Description",
@@ -141,17 +141,17 @@ class Platforms extends Component {
           case "Platform":
             return row.platform.includes(this.state.search);
 
-          case "Agency":
-            return row.agency.includes(this.state.search);
+          case "Location Number":
+            return row.location_number.includes(this.state.search);
 
           case "Transport-ID":
-            return row.transportid.includes(this.state.search);
+            return row.location_name.includes(this.state.search);
 
           case "Config":
-            return row.config.includes(this.state.search);
+            return row.active.includes(this.state.search);
 
           case "Expiration":
-            return row.expiration.includes(this.state.search);
+            return row.transmission_id.includes(this.state.search);
 
           case "Description":
             return row.description.includes(this.state.search);
@@ -160,10 +160,10 @@ class Platforms extends Component {
           default:
             return (
               row.platform.includes(this.state.search) ||
-              row.agency.includes(this.state.search) ||
-              row.transportid.includes(this.state.search) ||
-              row.config.includes(this.state.search) ||
-              row.expiration.includes(this.state.search) ||
+              row.location_number.includes(this.state.search) ||
+              row.location_name.includes(this.state.search) ||
+              row.active.includes(this.state.search) ||
+              row.transmission_id.includes(this.state.search) ||
               row.description.includes(this.state.search)
             );
         }
@@ -304,20 +304,20 @@ class Platforms extends Component {
                         value: this.state.selectedRow.row.platform
                       },
                       {
-                        title: "Agency",
-                        value: this.state.selectedRow.row.agency
+                        title: "Location Number",
+                        value: this.state.selectedRow.row.location_number
                       },
                       {
-                        title: "Transport-ID",
-                        value: this.state.selectedRow.row.transportid
+                        title: "Location Name",
+                        value: this.state.selectedRow.row.location_name
                       },
                       {
-                        title: "Config",
-                        value: this.state.selectedRow.row.config
+                        title: "Active",
+                        value: this.state.selectedRow.row.active
                       },
                       {
-                        title: "Expiration",
-                        value: this.state.selectedRow.row.expiration
+                        title: "Transmission ID",
+                        value: this.state.selectedRow.row.transmission_id
                       },
                       {
                         title: "Description",
