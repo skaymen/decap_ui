@@ -4,11 +4,6 @@ import ReactTable from "react-table";
 
 import "../styles/Messages.css";
 
-// import Play from "../images/play.svg";
-// import Forward from "../images/skipforward.svg";
-// import Back from "../images/skipback.svg";
-// import Refresh from "../images/update-arrows.svg";
-
 import messagedata from "../data/messages.json";
 
 const columns = [
@@ -26,10 +21,6 @@ const columns = [
 class Messages extends Component {
   constructor(props) {
     super(props);
-    this.skipForward = this.skipForward.bind(this);
-    this.skipBack = this.skipBack.bind(this);
-    this.decode = this.decode.bind(this);
-    this.refresh = this.refresh.bind(this);
 
     this.state = {
       //keep track of which message we are on
@@ -51,34 +42,6 @@ class Messages extends Component {
       selected: null
 
     };
-  }
-
-  skipForward() {
-    //move to the next element in the message list, or start over if at end
-    let i = this.state.index;
-    i < this.state.demo_data.message_text.length - 1 ? (i += 1) : (i = 0);
-    this.setState({ index: i });
-  }
-
-  skipBack() {
-    //move to previous element, or final element if at beginning
-    let i = this.state.index;
-    i > 0 ? (i -= 1) : (i = this.state.demo_data.message_text.length - 1);
-    this.setState({ index: i });
-  }
-
-  decode() {
-    //replace a given message with "decoded." should be replaced with something that makes more sense
-    let data = this.state.demo_data;
-    data.message_text[this.state.index] = "decoded!";
-    this.setState({ demo_data: data });
-  }
-
-  refresh() {
-    //not actually sure what should happen here. replace this code as needed
-    let data = this.state.demo_data;
-    data.message_text[this.state.index] = "refreshed!";
-    this.setState({ demo_data: data });
   }
 
   render() {
@@ -135,66 +98,8 @@ class Messages extends Component {
             }
           }}
          />
-            {/* <h3>
-              {/* print message data, page number, etc */}
-              {/* Message Data - {this.state.index + 1} of{" "}
-              {this.state.demo_data.message_text.length}
-              {/* <button id="refresh-button" onClick={this.refresh}>
-                <img src={Refresh} alt="refresh" id="refresh"/>
-              </button> */}
-              {/* <input
-                type="image"
-                src={Refresh}
-                id="refresh"
-                alt="refresh"
-                onClick={this.refresh}
-              /> */}
-            {/* </h3> */}
-            {/* <Dropdown>
-              <Dropdown.Toggle variant="primary" id="dropdown-basic">
-                Dropdown Button
-              </Dropdown.Toggle>
-
-              <Dropdown.Menu>
-                <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-                <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
-              </Dropdown.Menu>
-            </Dropdown> */}
-            {/* <div id="data-display">
-              <p>{this.state.demo_data.message_text[this.state.index]}</p>
-            </div> */}
           </div>
 
-          {/* buttons for skip and play */}
-          {/* <div id="buttons">
-            <Button
-              variant="outline-info"
-              className="message-button"
-              onClick={this.skipBack}
-            >
-              <img className="message-icon" src={Back} alt="back" id="back" />
-            </Button>
-            <Button
-              variant="outline-info"
-              className="message-button"
-              onClick={this.decode}
-            >
-              <img className="message-icon" src={Play} alt="play" id="play" />
-            </Button>
-            <Button
-              variant="outline-info"
-              className="message-button"
-              onClick={this.skipForward}
-            >
-              <img
-                className="message-icon"
-                src={Forward}
-                alt="forward"
-                id="forward"
-              />
-            </Button>
-          </div> */}
         </div>
       </div>
     );
