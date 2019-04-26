@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Platforms from "./components/Platforms";
 import Messages from "./components/Messages";
+import Decoder from "./components/Decoder";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -82,6 +83,16 @@ class Header extends App {
             >
               Messages
             </Button>
+
+            <Button
+              variant="outline-primary"
+              onClick={() => {
+                this.props.change("Decoder");
+              }}
+            >
+              Decoder
+            </Button>
+
           </ButtonToolbar>
         </div>
       </header>
@@ -102,7 +113,10 @@ class Body extends Component {
         return <h2>Configurations</h2>;
 
       case "Messages":
-        return <Messages/>
+        return <Messages/>;
+
+      case "Decoder":
+        return <Decoder/>;
 
       default:
         return null;

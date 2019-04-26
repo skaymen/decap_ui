@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+// import { Button } from "react-bootstrap";
 import ReactTable from "react-table";
 
 import "../styles/Messages.css";
 
-import Play from "../images/play.svg";
-import Forward from "../images/skipforward.svg";
-import Back from "../images/skipback.svg";
-import Refresh from "../images/update-arrows.svg";
+// import Play from "../images/play.svg";
+// import Forward from "../images/skipforward.svg";
+// import Back from "../images/skipback.svg";
+// import Refresh from "../images/update-arrows.svg";
 
 import messagedata from "../data/messages.json";
 

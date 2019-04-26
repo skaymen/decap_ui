@@ -50,3 +50,12 @@
     transform: rotate(360deg);
   }
 }
+
+.ReactTable {
+  margin: 1vh 2vh;
+}
+
+.rt-resizable-header-content {
+  font-weight: bold;
+  font-size: 1.5em;
+}
