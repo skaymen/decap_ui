@@ -3,6 +3,7 @@ import Platforms from "./components/Platforms";
 import Messages from "./components/Messages";
 import Decoder from "./components/Decoder";
 import Configurations from "./components/Configurations";
+import Sites from "./components/Sites";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -108,7 +109,7 @@ class Body extends Component {
         return <Platforms />;
 
       case "Sites":
-        return <h2>Sites</h2>;
+        return <Sites />;
 
       case "Configurations":
         return <Configurations />;
