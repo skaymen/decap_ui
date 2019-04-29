@@ -1,40 +1,34 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 import ReactTable from "react-table";
 import { Dropdown, DropdownButton } from "react-bootstrap";
-import Window from "./Window.js";
+
 import DropdownItems from "./DropdownItems.js";
 import DBButtonToolbar from "./DBButtonToolbar.js";
 import DataDisplay from "./DataDisplay.js";
 
-import "../styles/App.css";
-import "../styles/Platforms.css";
-import "react-table/react-table.css";
-import "../styles/bootstrap.min.css";
-
-import platformdata from "../data/platformdata.json";
+import configdata from "../data/configdata.json";
 
 //define columns for the data table
 const columns = [
   {
-    Header: "Platform",
-    accessor: "platform" // String-based value accessors!
+    Header: "Name",
+    accessor: "name" // String-based value accessors!
   },
   {
-    Header: "Location Number",
-    accessor: "location_number"
+    Header: "Binary / ASCII",
+    accessor: "binascii"
   },
   {
-    Header: "Location Name",
-    accessor: "location_name"
+    Header: "Parameters",
+    accessor: "params"
   },
   {
-    Header: "Active",
-    accessor: "active"
+    Header: "Transmission Interval",
+    accessor: "interval"
   },
   {
-    Header: "Transmission ID",
-    accessor: "transmission_id"
+    Header: "Number of Platforms",
+    accessor: "numplats"
   },
   {
     Header: "Description",
@@ -42,16 +36,13 @@ const columns = [
   }
 ];
 
-class Platforms extends Component {
+class Configurations extends Component {
   constructor(props) {
     super(props);
 
-    //bind functions to show and close the modal
-    this.handleShow = this.handleShow.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
-    this.handleClosePlatformDisplay = this.handleClosePlatformDisplay.bind(
-      this
-    );
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
 
     this.state = {
       selectedIndex: -1,
@@ -61,25 +52,20 @@ class Platforms extends Component {
       filterState: "All",
       showPlatformDisplay: false
     };
+  }
 
-    this.windowNode = document.createElement("div");
+  changeFilter(newState) {
+    this.setState({ filterState: newState });
   }
 
   handleShow() {
     this.setState({ show: true });
     this.setState({ key: Math.random() });
     this.setState({ showPlatformDisplay: true });
-
-    // window.onload = function() {
-    // }
   }
 
-  handleClosePlatformDisplay() {
+  handleClose() {
     this.setState({ showPlatformDisplay: false });
-  }
-
-  changeFilter(newState) {
-    this.setState({ filterState: newState });
   }
 
   scrollToBottom = () => {
@@ -96,63 +82,25 @@ class Platforms extends Component {
   }
 
   render() {
-    let data = platformdata;
+    let data = configdata;
 
-    //create the pop-up window in a portal attached to its own node
-    var window = ReactDOM.createPortal(
-      <Window
-        show={this.state.show}
-        selectedRow={this.state.selectedRow}
-        firstCol={this.state.selectedRow.platform}
-        key={this.state.key}
-        displayData={
-          this.state.selectedRow.row === undefined
-            ? [{ title: "", value: "" }]
-            : [
-                {
-                  title: "Platform",
-                  value: this.state.selectedRow.row.platform
-                },
-                {
-                  title: "Location Number",
-                  value: this.state.selectedRow.row.location_number
-                },
-                {
-                  title: "Location Name",
-                  value: this.state.selectedRow.row.location_name
-                },
-                { title: "Active", value: this.state.selectedRow.row.active },
-                {
-                  title: "Transmission ID",
-                  value: this.state.selectedRow.row.transmission_id
-                },
-                {
-                  title: "Description",
-                  value: this.state.selectedRow.row.description
-                }
-              ]
-        }
-      />,
-      this.windowNode
-    );
-    // define the filter functionality for the table-- which column is searched depends on what is selected
     if (this.state.search) {
       data = data.filter(row => {
         switch (this.state.filterState) {
-          case "Platform":
-            return row.platform.includes(this.state.search);
+          case "Name":
+            return row.name.includes(this.state.search);
 
-          case "Location Number":
-            return row.location_number.includes(this.state.search);
+          case "Binary / ASCII":
+            return row.binascii.includes(this.state.search);
 
-          case "Transport-ID":
-            return row.location_name.includes(this.state.search);
+          case "Parameters":
+            return row.params.includes(this.state.search);
 
-          case "Config":
-            return row.active.includes(this.state.search);
+          case "Transmission Interval":
+            return row.interval.includes(this.state.search);
 
-          case "Expiration":
-            return row.transmission_id.includes(this.state.search);
+          case "Number of Platforms":
+            return row.numplats.includes(this.state.search);
 
           case "Description":
             return row.description.includes(this.state.search);
@@ -160,11 +108,11 @@ class Platforms extends Component {
           // search all columns
           default:
             return (
-              row.platform.includes(this.state.search) ||
-              row.location_number.includes(this.state.search) ||
-              row.location_name.includes(this.state.search) ||
-              row.active.includes(this.state.search) ||
-              row.transmission_id.includes(this.state.search) ||
+              row.name.includes(this.state.search) ||
+              row.binascii.includes(this.state.search) ||
+              row.params.includes(this.state.search) ||
+              row.interval.includes(this.state.search) ||
+              row.numplats.includes(this.state.search) ||
               row.description.includes(this.state.search)
             );
         }
@@ -175,7 +123,7 @@ class Platforms extends Component {
       <div id="platforms_div">
         {/* put some style here to make the title and filter box go where they are supposed to */}
         <div id="platform-header" style={{ flexDirection: "row" }}>
-          <h2 id="title"> Platforms </h2>
+          <h2 id="title"> Configurations </h2>
 
           <div id="filter">
             <DropdownButton id="filter-dropdown" title={this.state.filterState}>
@@ -200,8 +148,6 @@ class Platforms extends Component {
             />
           </div>
         </div>
-
-        {/* define the data table */}
         <ReactTable
           data={data}
           columns={columns}
@@ -234,41 +180,37 @@ class Platforms extends Component {
             }
           }}
         />
-
-        {/* button toolbar for table interaction functionality */}
         <DBButtonToolbar
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
         />
-
-        {window}
         {this.state.showPlatformDisplay ? (
           <div id="platform-display-container">
             <DataDisplay
-              close={this.handleClosePlatformDisplay}
+              close={this.handleClose}
               displayData={
                 this.state.selectedRow.row === undefined
                   ? [{ title: "", value: "" }]
                   : [
                       {
-                        title: "Platform",
-                        value: this.state.selectedRow.row.platform
+                        title: "Name",
+                        value: this.state.selectedRow.row.name
                       },
                       {
-                        title: "Location Number",
-                        value: this.state.selectedRow.row.location_number
+                        title: "Binary / ASCII",
+                        value: this.state.selectedRow.row.binascii
                       },
                       {
-                        title: "Location Name",
-                        value: this.state.selectedRow.row.location_name
+                        title: "Parameters",
+                        value: this.state.selectedRow.row.params
                       },
                       {
-                        title: "Active",
-                        value: this.state.selectedRow.row.active
+                        title: "Transmission Interval",
+                        value: this.state.selectedRow.row.interval
                       },
                       {
-                        title: "Transmission ID",
-                        value: this.state.selectedRow.row.transmission_id
+                        title: "Number of Platforms",
+                        value: this.state.selectedRow.row.numplats
                       },
                       {
                         title: "Description",
@@ -285,4 +227,4 @@ class Platforms extends Component {
   }
 }
 
-export default Platforms;
+export default Configurations;

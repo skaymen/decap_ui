@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Platforms from "./components/Platforms";
 import Messages from "./components/Messages";
 import Decoder from "./components/Decoder";
+import Configurations from "./components/Configurations";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -110,7 +111,7 @@ class Body extends Component {
         return <h2>Sites</h2>;
 
       case "Configurations":
-        return <h2>Configurations</h2>;
+        return <Configurations />;
 
       case "Messages":
         return <Messages/>;
