@@ -19,7 +19,7 @@ class DataDisplay extends Component {
     });
 
     return (
-      <div id="platform-display">
+      <div id="data-display">
         <h3 id="display-title">{this.props.displayData[0].value}</h3>
         {data}
         <Button

@@ -8,7 +8,6 @@ import DBButtonToolbar from "./DBButtonToolbar.js";
 import DataDisplay from "./DataDisplay.js";
 
 import "../styles/App.css";
-import "../styles/Platforms.css";
 import "react-table/react-table.css";
 import "../styles/bootstrap.min.css";
 
@@ -172,9 +171,9 @@ class Platforms extends Component {
     }
 
     return (
-      <div id="platforms_div">
+      <div id="component-div">
         {/* put some style here to make the title and filter box go where they are supposed to */}
-        <div id="platform-header" style={{ flexDirection: "row" }}>
+        <div id="component-header" style={{ flexDirection: "row" }}>
           <h2 id="title"> Platforms </h2>
 
           <div id="filter">
@@ -243,7 +242,7 @@ class Platforms extends Component {
 
         {window}
         {this.state.showPlatformDisplay ? (
-          <div id="platform-display-container">
+          <div id="data-display-container">
             <DataDisplay
               close={this.handleClosePlatformDisplay}
               displayData={

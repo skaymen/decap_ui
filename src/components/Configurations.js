@@ -50,7 +50,6 @@ class Configurations extends Component {
       search: "",
       show: false,
       filterState: "All",
-      showPlatformDisplay: false
     };
   }
 
@@ -61,11 +60,11 @@ class Configurations extends Component {
   handleShow() {
     this.setState({ show: true });
     this.setState({ key: Math.random() });
-    this.setState({ showPlatformDisplay: true });
+    this.setState({ show: true });
   }
 
   handleClose() {
-    this.setState({ showPlatformDisplay: false });
+    this.setState({ show: false });
   }
 
   scrollToBottom = () => {
@@ -120,9 +119,8 @@ class Configurations extends Component {
     }
 
     return (
-      <div id="platforms_div">
-        {/* put some style here to make the title and filter box go where they are supposed to */}
-        <div id="platform-header" style={{ flexDirection: "row" }}>
+      <div id="component-div">
+        <div id="component-header" style={{ flexDirection: "row" }}>
           <h2 id="title"> Configurations </h2>
 
           <div id="filter">
@@ -184,8 +182,8 @@ class Configurations extends Component {
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
         />
-        {this.state.showPlatformDisplay ? (
-          <div id="platform-display-container">
+        {this.state.show ? (
+          <div id="data-display-container">
             <DataDisplay
               close={this.handleClose}
               displayData={

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Button, Modal } from "react-bootstrap";
 
 import "../styles/App.css";
-import "../styles/Platforms.css";
 import "react-table/react-table.css";
 import "../styles/bootstrap.min.css";
 
