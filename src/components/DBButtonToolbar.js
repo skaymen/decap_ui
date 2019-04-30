@@ -11,7 +11,7 @@ class DBButtonToolbar extends Component {
           id="platform-button"
           onClick={() => {
             if (this.props.selectedIndex >= 0) {
-              //call the function to display the data modal
+              //call the function to display the data (via Window/modal or DataDisplay)
               this.props.handleShow();
             } else {
               alert("nothing selected!");
@@ -21,6 +21,7 @@ class DBButtonToolbar extends Component {
           Open
         </Button>
 
+        {/* button for create new. Doesn't do anything now. Database call should be passed in via props */}
         <Button
           variant="primary"
           id="platform-button"
@@ -31,6 +32,7 @@ class DBButtonToolbar extends Component {
           New
         </Button>
 
+        {/* copying doesn't do anything either */}
         <Button
           variant="primary"
           id="platform-button"
@@ -45,6 +47,7 @@ class DBButtonToolbar extends Component {
           Copy
         </Button>
 
+        {/* delete. same as copy and new */}
         <Button
           variant="danger"
           id="platform-button"

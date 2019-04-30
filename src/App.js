@@ -94,7 +94,6 @@ class Header extends App {
             >
               Decoder
             </Button>
-
           </ButtonToolbar>
         </div>
       </header>
@@ -102,6 +101,7 @@ class Header extends App {
   }
 }
 
+//choose which component to display based on selectedPage
 class Body extends Component {
   render() {
     switch (this.props.selectedPage) {
@@ -115,10 +115,10 @@ class Body extends Component {
         return <Configurations />;
 
       case "Messages":
-        return <Messages/>;
+        return <Messages />;
 
       case "Decoder":
-        return <Decoder/>;
+        return <Decoder />;
 
       default:
         return null;
@@ -127,7 +127,6 @@ class Body extends Component {
 }
 
 // This is code for making the app multi-page. For now, we are simply adding and removing components on a single page
-
 const routes = [
   {
     path: "/",
@@ -142,6 +141,7 @@ const routes = [
   }
 ];
 
+//sidebar contains the router between different pages
 function Sidebar() {
   return (
     <Router>

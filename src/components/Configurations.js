@@ -36,10 +36,12 @@ const columns = [
   }
 ];
 
+//this class implements the same table setup as sites and platforms
 class Configurations extends Component {
   constructor(props) {
     super(props);
 
+    //bind functions
     this.changeFilter = this.changeFilter.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -53,25 +55,29 @@ class Configurations extends Component {
     };
   }
 
+  //function that searches when text is entered in filter
   changeFilter(newState) {
     this.setState({ filterState: newState });
   }
 
+  //function to show the data display box
   handleShow() {
-    this.setState({ show: true });
     this.setState({ key: Math.random() });
     this.setState({ show: true });
   }
 
+  //close the data display box
   handleClose() {
     this.setState({ show: false });
   }
 
+  //scroll down to the bottom of the page
   scrollToBottom = () => {
     var pfdis = document.getElementById("page-bottom");
     pfdis.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
+  //scroll to bottom when adding a component or updating
   componentDidMount() {
     this.scrollToBottom();
   }
@@ -83,6 +89,7 @@ class Configurations extends Component {
   render() {
     let data = configdata;
 
+    //filter based on dropdown select and what is entered in text box
     if (this.state.search) {
       data = data.filter(row => {
         switch (this.state.filterState) {
@@ -123,6 +130,7 @@ class Configurations extends Component {
         <div id="component-header" style={{ flexDirection: "row" }}>
           <h2 id="title"> Configurations </h2>
 
+          {/* set up filter dropdown, bringing in external component DropdownItems */}
           <div id="filter">
             <DropdownButton id="filter-dropdown" title={this.state.filterState}>
               <DropdownItems
@@ -139,6 +147,7 @@ class Configurations extends Component {
                 All
               </Dropdown.Item>
             </DropdownButton>
+            {/* this is the filterbox, which searches immediately when text is entered */}
             Filter:{" "}
             <input
               value={this.state.search}
@@ -146,6 +155,7 @@ class Configurations extends Component {
             />
           </div>
         </div>
+        {/* set up the data table */}
         <ReactTable
           data={data}
           columns={columns}
@@ -178,12 +188,14 @@ class Configurations extends Component {
             }
           }}
         />
+        {/* bring in external DBButtonToolbar component */}
         <DBButtonToolbar
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
         />
         {this.state.show ? (
           <div id="data-display-container">
+          {/* this brings in the DataDisplay component so data can be opened at the bottom of the screen */}
             <DataDisplay
               close={this.handleClose}
               displayData={

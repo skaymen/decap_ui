@@ -40,7 +40,6 @@ class Messages extends Component {
         ]
       },
       selected: null
-
     };
   }
 
@@ -48,58 +47,58 @@ class Messages extends Component {
     let data = messagedata;
     return (
       <div id="messages">
-        {/* list relevant informaiton along the top */}
+        {/* list relevant informationon along the top. Inputs are not yet functional */}
         <div id="top-boxes">
           <div className="text-box">
             <h3>Message Source</h3>
-            {/* <p>{this.state.demo_data.source}</p> */}
-            <input/>
+            <input />
           </div>
           <div className="text-box">
             <h3>Location / Transmission ID</h3>
-            {/* <p>{this.state.demo_data.location}</p> */}
-            <input/>
+            <input />
           </div>
           <div className="text-box">
             <h3>Time Period</h3>
-            {/* <p>{this.state.demo_data.time_period}</p> */}
-            <input/>
+            <input />
           </div>
           <div className="text-box">
             <h3>Message Output Format</h3>
-            {/* <p>{this.state.demo_data.output_format}</p> */}
-            <input/>
+            <input />
           </div>
         </div>
         <div id="message-data-box">
           <div id="message-data">
-          <ReactTable
-          data={data}
-          columns={columns}
-          // set the default number of rows to display. take away ability to change thos.
-          defaultPageSize={5}
-          showPageSizeOptions={false}
-          //this is code to make elements within the table selectable
-          getTrProps={(state, rowInfo) => {
-            if (rowInfo && rowInfo.row) {
-              return {
-                onClick: (e) => {
-                  this.setState({
-                    selected: rowInfo.index
-                  })
-                },
-                style: {
-                  background: rowInfo.index === this.state.selected ? '#00afec' : 'white',
-                  color: rowInfo.index === this.state.selected ? 'white' : 'black'
+            {/* similar table as used in sites/platforms/configs */}
+            <ReactTable
+              data={data}
+              columns={columns}
+              defaultPageSize={5}
+              showPageSizeOptions={false}
+              getTrProps={(state, rowInfo) => {
+                if (rowInfo && rowInfo.row) {
+                  return {
+                    onClick: e => {
+                      this.setState({
+                        selected: rowInfo.index
+                      });
+                    },
+                    style: {
+                      background:
+                        rowInfo.index === this.state.selected
+                          ? "#00afec"
+                          : "white",
+                      color:
+                        rowInfo.index === this.state.selected
+                          ? "white"
+                          : "black"
+                    }
+                  };
+                } else {
+                  return {};
                 }
-              }
-            }else{
-              return {}
-            }
-          }}
-         />
+              }}
+            />
           </div>
-
         </div>
       </div>
     );

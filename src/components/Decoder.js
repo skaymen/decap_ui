@@ -8,6 +8,7 @@ import Forward from "../images/skipforward.svg";
 import Back from "../images/skipback.svg";
 import Refresh from "../images/update-arrows.svg";
 
+//decoder component. navigate through messages and decode them with buttons
 class Decoder extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +21,7 @@ class Decoder extends Component {
     this.refresh = this.refresh.bind(this);
 
     this.state = {
+      //set up some default format statements
       statements: [
         { id: 1, label: "first one", format_statement: "xxx" },
         { id: 2, label: "second one", format_statement: "yyy" },
@@ -38,9 +40,12 @@ class Decoder extends Component {
       decoded_data: ["", "", "", "", ""]
     };
   }
+
+  //code to add a new format statement
   addStatement() {
     var temp = this.state.statements;
     var rand = Math.random();
+    //just filled with default text for now
     temp.push({
       id: rand,
       label: "another one",
@@ -49,6 +54,7 @@ class Decoder extends Component {
     this.setState({ statements: temp });
   }
 
+  //code to find a statement by its id and remove it from the array
   removeStatement(target) {
     var temp = this.state.statements;
     for (var i = 0; i < temp.length; i++) {
@@ -92,24 +98,29 @@ class Decoder extends Component {
       <div id="decoder">
         <div id="format-statements">
           <h3 id="title">Format Statements</h3>
+          {/* bring in FormatStatements component */}
           <FormatStatements
             statements={this.state.statements}
             removeStatement={this.removeStatement}
           />
           <Button onClick={this.addStatement}> Add Statement </Button>
+          {/* button doesn't actually do anything right now */}
           <Button>Apply</Button>
         </div>
 
         <div id="message-decoder">
           <div id="title-and-refresh">
             <h3 id="title">
+              {/* show title and where we are in the list */}
               Message Decoder - {this.state.index + 1} of{" "}
               {this.state.message_text.length}{" "}
             </h3>
+            {/* refresh button */}
             <Button variant="light" id="refresh-button" onClick={this.refresh}>
               <img src={Refresh} alt="refresh" id="refresh" />
             </Button>
           </div>
+          {/* show the message text and decoded data of the current list element */}
           <div id="message-blocks">
             <div className="message">
               <h4>Message Text</h4>
@@ -120,6 +131,7 @@ class Decoder extends Component {
               {this.state.decoded_data[this.state.index]}
             </div>
           </div>
+          {/* skip back, play, and skip forward buttons */}
           <div id="message-nav-buttons">
             <Button
               variant="outline-info"
@@ -154,6 +166,7 @@ class Decoder extends Component {
   }
 }
 
+//component to create the format statements
 class FormatStatements extends Decoder {
   render() {
     var removeStatement = this.props.removeStatement;

@@ -6,7 +6,6 @@ import "react-table/react-table.css";
 import "../styles/bootstrap.min.css";
 
 //this is a component to create a pop up modal window
-
 class Window extends Component {
   constructor(props) {
     super(props);
@@ -18,6 +17,7 @@ class Window extends Component {
     };
   }
 
+  //function to close the window
   handleClose() {
     this.setState({ show: false });
   }
@@ -51,6 +51,7 @@ class Window extends Component {
         </Modal.Body>
 
         <Modal.Footer>
+          {/* can be closed via this button or closeButton */}
           <Button variant="secondary" onClick={this.handleClose}>
             Close
           </Button>

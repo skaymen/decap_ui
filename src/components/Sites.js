@@ -32,10 +32,12 @@ const columns = [
   }
 ];
 
+//site component. operates similarly to configs / platforms
 class Sites extends Component {
   constructor(props) {
     super(props);
 
+    //bind functions
     this.changeFilter = this.changeFilter.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
@@ -45,33 +47,38 @@ class Sites extends Component {
       selectedRow: {},
       search: "",
       show: false,
-      filterState: "All",
+      filterState: "All"
     };
   }
 
+  //filter on update
   changeFilter(newState) {
     this.setState({ filterState: newState });
   }
 
+  //show datadisplay
   handleShow() {
-    this.setState({ show: true });
     this.setState({ key: Math.random() });
     this.setState({ show: true });
   }
 
+  //close datadisplay
   handleClose() {
     this.setState({ show: false });
   }
 
+  //smooth scroll to bottom of document
   scrollToBottom = () => {
     var pfdis = document.getElementById("page-bottom");
     pfdis.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
+  //scroll to botton on mount
   componentDidMount() {
     this.scrollToBottom();
   }
 
+  //scroll to bottom on update
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -79,6 +86,7 @@ class Sites extends Component {
   render() {
     let data = sitedata;
 
+    //implement search function as in platforms / configs
     if (this.state.search) {
       data = data.filter(row => {
         switch (this.state.filterState) {
@@ -112,11 +120,11 @@ class Sites extends Component {
 
     return (
       <div id="component-div">
-        {/* put some style here to make the title and filter box go where they are supposed to */}
         <div id="component-header" style={{ flexDirection: "row" }}>
           <h2 id="title"> Sites </h2>
 
           <div id="filter">
+            {/* bring in DropdownItems component */}
             <DropdownButton id="filter-dropdown" title={this.state.filterState}>
               <DropdownItems
                 columns={columns}
@@ -139,10 +147,10 @@ class Sites extends Component {
             />
           </div>
         </div>
+        {/* set up data table */}
         <ReactTable
           data={data}
           columns={columns}
-          // set the default number of rows to display. take away ability to change thos.
           defaultPageSize={10}
           showPageSizeOptions={false}
           //this is code to make elements within the table selectable
@@ -171,12 +179,14 @@ class Sites extends Component {
             }
           }}
         />
+        {/* bring in button toolbar component */}
         <DBButtonToolbar
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
         />
         {this.state.show ? (
           <div id="data-display-container">
+            {/* bring in DataDisplay */}
             <DataDisplay
               close={this.handleClose}
               displayData={

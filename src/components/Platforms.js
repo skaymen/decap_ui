@@ -41,6 +41,7 @@ const columns = [
   }
 ];
 
+//platforms component. this is where original work for data table / modal / data display / buttons / etc. was done
 class Platforms extends Component {
   constructor(props) {
     super(props);
@@ -48,48 +49,49 @@ class Platforms extends Component {
     //bind functions to show and close the modal
     this.handleShow = this.handleShow.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
-    this.handleClosePlatformDisplay = this.handleClosePlatformDisplay.bind(
-      this
-    );
+    this.handleCloseDataDisplay = this.handleCloseDataDisplay.bind(this);
 
     this.state = {
       selectedIndex: -1,
       selectedRow: {},
       search: "",
-      show: false,
+      showModal: false,
       filterState: "All",
-      showPlatformDisplay: false
+      showDataDisplay: false
     };
 
     this.windowNode = document.createElement("div");
   }
 
+  //show both the Window / modal and DataDisplay
   handleShow() {
-    this.setState({ show: true });
+    this.setState({ showModal: true });
     this.setState({ key: Math.random() });
-    this.setState({ showPlatformDisplay: true });
-
-    // window.onload = function() {
-    // }
+    this.setState({ showDataDisplay: true });
   }
 
-  handleClosePlatformDisplay() {
-    this.setState({ showPlatformDisplay: false });
+  //close the data display
+  handleCloseDataDisplay() {
+    this.setState({ showDataDisplay: false });
   }
 
+  //update the filter
   changeFilter(newState) {
     this.setState({ filterState: newState });
   }
 
+  //smooth scroll to bottom of page
   scrollToBottom = () => {
     var pfdis = document.getElementById("page-bottom");
     pfdis.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
+  //scroll to bottom on mount
   componentDidMount() {
     this.scrollToBottom();
   }
 
+  //scroll to bottom on update
   componentDidUpdate() {
     this.scrollToBottom();
   }
@@ -97,10 +99,10 @@ class Platforms extends Component {
   render() {
     let data = platformdata;
 
-    //create the pop-up window in a portal attached to its own node
+    //create the pop-up window in a portal attached to its own node. this window functionality is opposed to using DataDisplay
     var window = ReactDOM.createPortal(
       <Window
-        show={this.state.show}
+        show={this.state.showModal}
         selectedRow={this.state.selectedRow}
         firstCol={this.state.selectedRow.platform}
         key={this.state.key}
@@ -172,10 +174,10 @@ class Platforms extends Component {
 
     return (
       <div id="component-div">
-        {/* put some style here to make the title and filter box go where they are supposed to */}
         <div id="component-header" style={{ flexDirection: "row" }}>
           <h2 id="title"> Platforms </h2>
 
+          {/* bring in DropdownItems component */}
           <div id="filter">
             <DropdownButton id="filter-dropdown" title={this.state.filterState}>
               <DropdownItems
@@ -241,10 +243,11 @@ class Platforms extends Component {
         />
 
         {window}
-        {this.state.showPlatformDisplay ? (
+        {/* bring in DataDisplay component */}
+        {this.state.showDataDisplay ? (
           <div id="data-display-container">
             <DataDisplay
-              close={this.handleClosePlatformDisplay}
+              close={this.handleCloseDataDisplay}
               displayData={
                 this.state.selectedRow.row === undefined
                   ? [{ title: "", value: "" }]
