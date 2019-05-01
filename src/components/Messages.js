@@ -1,26 +1,32 @@
 import React, { Component } from "react";
 // import { Button } from "react-bootstrap";
 import ReactTable from "react-table";
+import { DropdownButton, Dropdown } from "react-bootstrap";
+import DropdownItems from "./DropdownItems.js";
+import TimeField from "react-simple-timefield";
 
 import "../styles/Messages.css";
 
 import messagedata from "../data/messages.json";
 
-const columns = [
-  {
-    Header: "Message Text",
-    accessor: "message_text" // String-based value accessors!
-  },
-  {
-    Header: "Decoded Data",
-    accessor: "decoded_data"
-  }
+const dropdownItems = [
+  { Header: "lrgseros1.cr.usgs.gov" },
+  { Header: "lrgseros2.cr.usgs.gov" },
+  { Header: "lrgseros3.cr.usgs.gov" },
+  { Header: "lrgs2hq.er.usgs.gov" },
+  { Header: "lrgseddn1.cr.usgs.gov" },
+  { Header: "lrgseddn2.cr.usgs.gov" },
+  { Header: "lrgseddn3.cr.usgs.gov" }
 ];
 
 //messaging component for the database editor
 class Messages extends Component {
   constructor(props) {
     super(props);
+
+    this.setTransmissionSource = this.setTransmissionSource.bind(this);
+    this.onEarlyTimeBoundChange = this.onEarlyTimeBoundChange.bind(this);
+    this.onLateTimeBoundChange = this.onLateTimeBoundChange.bind(this);
 
     this.state = {
       //keep track of which message we are on
@@ -39,11 +45,54 @@ class Messages extends Component {
           "Elit eget gravida cum sociis natoque penatibus. Nibh tortor id aliquet lectus proin nibh. Sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur. Blandit turpis cursus in hac habitasse. Nibh mauris cursus mattis molestie a. In dictum non consectetur a erat nam. Justo nec ultrices dui sapien eget mi. Aliquet porttitor lacus luctus accumsan tortor posuere ac ut consequat. Viverra nibh cras pulvinar mattis nunc. At erat pellentesque adipiscing commodo elit at. Adipiscing tristique risus nec feugiat in fermentum. A arcu cursus vitae congue mauris. Amet massa vitae tortor condimentum lacinia quis. Nulla aliquet porttitor lacus luctus."
         ]
       },
-      selected: null
+      selected: null,
+      transmissionSource: "Transmission Source",
+      locationFilterState: "Location",
+      timeFilterState: "Last",
+      outputFormat: "raw",
+      earlyTimeBound: "00:00:01",
+      lateTimeBound: "23:59:59",
+      search: ""
     };
   }
 
+  setTransmissionSource(newSource) {
+    this.setState({ transmissionSource: newSource });
+  }
+
+  changeLocationFilter(newState) {
+    this.setState({ locationFilterState: newState });
+  }
+
+  changeTimeFilter(newState) {
+    this.setState({ timeFilterState: newState });
+  }
+
+  changeOutputFormat(newState) {
+    this.setState({ outputFormat: newState });
+  }
+
+  onEarlyTimeBoundChange(time) {
+    this.setState({earlyTimeBound: time});
+  }
+
+  onLateTimeBoundChange(time) {
+    this.setState({lateTimeBound: time});
+  }
+
   render() {
+
+    var columns = [
+      {
+        Header: "Message Text",
+        accessor: "message_text" // String-based value accessors!
+      },
+      {
+        Header: "Data",
+        accessor: this.state.outputFormat
+      }
+    ];
+
     let data = messagedata;
     return (
       <div id="messages">
@@ -51,19 +100,135 @@ class Messages extends Component {
         <div id="top-boxes">
           <div className="text-box">
             <h3>Message Source</h3>
-            <input />
+            {/* bring in DropdownItems component */}
+            <div id="transmissions-dropdown-container">
+              <DropdownButton
+                id="transmissions-dropdown"
+                title={this.state.transmissionSource}
+              >
+                <DropdownItems
+                  columns={dropdownItems}
+                  filterState={this.state.transmissionSource}
+                  changeFilter={this.setTransmissionSource}
+                />
+              </DropdownButton>
+            </div>
           </div>
+
           <div className="text-box">
             <h3>Location / Transmission ID</h3>
-            <input />
+            <div id="transmissions-filter">
+              <DropdownButton
+                id="transmission-dropdown"
+                title={this.state.locationFilterState}
+              >
+                <Dropdown.Item
+                  onClick={() => {
+                    this.changeLocationFilter("Location");
+                  }}
+                >
+                  Location
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    this.changeLocationFilter("Transmission ID");
+                  }}
+                >
+                  {" "}
+                  Transmission ID
+                </Dropdown.Item>
+              </DropdownButton>{" "}
+              <input
+                id="transmission-input"
+                value={this.state.search}
+                onChange={e => this.setState({ search: e.target.value })}
+              />
+            </div>
           </div>
+
           <div className="text-box">
             <h3>Time Period</h3>
-            <input />
+            <div id="transmissions-dropdown-container">
+              <DropdownButton
+                id="transmission-dropdown"
+                title={this.state.timeFilterState}
+              >
+                <Dropdown.Item
+                  onClick={() => {
+                    this.changeTimeFilter("Last");
+                  }}
+                >
+                  Last
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    this.changeTimeFilter("Between");
+                  }}
+                >
+                  {" "}
+                  Between
+                </Dropdown.Item>
+              </DropdownButton>
+            </div>
+            {this.state.timeFilterState === "Between" ? (
+              <div id="time-inputs">
+                {" "}
+                <TimeField
+                  id="time-input"
+                  value={this.state.earlyTimeBound}
+                  onChange={this.onEarlyTimeBoundChange}
+                  showSeconds={true}
+                  style={{
+                    border: "2px solid #666",
+                    fontSize: 14,
+                    width: 75,
+                    padding: "5px 8px",
+                    color: "#333",
+                    borderRadius: 3
+                  }}
+                />
+                and
+                <TimeField
+                  id="time-input"
+                  value={this.state.lateTimeBound}
+                  onChange={this.onLateTimeBoundChange}
+                  showSeconds={true}
+                  style={{
+                    border: "2px solid #666",
+                    fontSize: 14,
+                    width: 75,
+                    padding: "5px 8px",
+                    color: "#333",
+                    borderRadius: 3
+                  }}
+                />
+              </div>
+            ) : null}
           </div>
           <div className="text-box">
             <h3>Message Output Format</h3>
-            <input />
+            <div id="transmissions-filter">
+              <DropdownButton
+                id="transmission-dropdown"
+                title={this.state.outputFormat}
+              >
+                <Dropdown.Item
+                  onClick={() => {
+                    this.changeOutputFormat("raw");
+                  }}
+                >
+                  raw
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    this.changeOutputFormat("decoded");
+                  }}
+                >
+                  {" "}
+                  decoded
+                </Dropdown.Item>
+              </DropdownButton>
+            </div>
           </div>
         </div>
         <div id="message-data-box">

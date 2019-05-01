@@ -1,7 +1,7 @@
 [
     {
       "platform": "ABEE-goes",
-      "location_number": 12345433,
+      "location_number": "12345433",
       "location_name": " 444A6254",
       "active": "yes",
       "transmission_id": " ",
@@ -9,7 +9,7 @@
     },
     {
       "platform": "ABNMS-goes",
-      "location_number": 34534535,
+      "location_number": "34534535",
       "location_name": " 444717A2",
       "active": "no",
       "transmission_id": " ",
@@ -17,7 +17,7 @@
     },
     {
       "platform": "ABNMS3-goes",
-      "location_number": 12346546,
+      "location_number": "12346546",
       "location_name": " 444B5534",
       "active": "yes",
       "transmission_id": " ",
@@ -25,7 +25,7 @@
     },
     {
       "platform": "ABNMS4-goes",
-      "location_number": 12343564,
+      "location_number": "12343564",
       "location_name": " 444900BC",
       "active": "yes",
       "transmission_id": " ",
@@ -33,7 +33,7 @@
     },
     {
       "platform": "ABNMS5-goes",
-      "location_number": 56745645,
+      "location_number": "56745645",
       "location_name": " 444824AA",
       "active": "yes",
       "transmission_id": " ",
@@ -41,7 +41,7 @@
     },
     {
       "platform": "ABNMS6-goes",
-      "location_number": 45643546,
+      "location_number": "45643546",
       "location_name": " 4449C5A2",
       "active": "no",
       "transmission_id": " ",
@@ -49,7 +49,7 @@
     },
     {
       "platform": "ABSMS-goes",
-      "location_number": 45567565,
+      "location_number": "45567565",
       "location_name": " 44415466",
       "active": "no",
       "transmission_id": " ",
@@ -57,7 +57,7 @@
     },
     {
       "platform": "ABEE-goes",
-      "location_number": 546756756,
+      "location_number": "546756756",
       "location_name": " 444A6254",
       "active": "no",
       "transmission_id": " ",
@@ -65,7 +65,7 @@
     },
     {
       "platform": "ABNMS-goes",
-      "location_number": 96744567,
+      "location_number": "96744567",
       "location_name": " 444717A2",
       "active": "no",
       "transmission_id": " ",
@@ -73,7 +73,7 @@
     },
     {
       "platform": "ABNMS3-goes",
-      "location_number": 67898678,
+      "location_number": "67898678",
       "location_name": " 444B5534",
       "active": "yes",
       "transmission_id": " ",
@@ -81,7 +81,7 @@
     },
     {
       "platform": "ABNMS4-goes",
-      "location_number": 5675967,
+      "location_number": "5675967",
       "location_name": " 444900BC",
       "active": "yes",
       "transmission_id": " ",
@@ -89,7 +89,7 @@
     },
     {
       "platform": "ABNMS5-goes",
-      "location_number": 678678,
+      "location_number": "678678",
       "location_name": " 444824AA",
       "active": "yes",
       "transmission_id": " ",
@@ -97,7 +97,7 @@
     },
     {
       "platform": "ABNMS6-goes",
-      "location_number": 6789687,
+      "location_number": "6789687",
       "location_name": " 4449C5A2",
       "active": "yes",
       "transmission_id": " ",
@@ -105,7 +105,7 @@
     },
     {
       "platform": "ABSMS-goes",
-      "location_number": 7897556,
+      "location_number": "7897556",
       "location_name": " 44415466",
       "active": "yes",
       "transmission_id": " ",
@@ -113,7 +113,7 @@
     },
     {
         "platform": "ABEE-goes",
-        "location_number": 4565656,
+        "location_number": "4565656",
         "location_name": " 444A6254",
         "active": "yes",
         "transmission_id": " ",
@@ -121,7 +121,7 @@
       },
       {
         "platform": "ABNMS-goes",
-        "location_number": 89089898,
+        "location_number": "89089898",
         "location_name": " 444717A2",
         "active": "no",
         "transmission_id": " ",
@@ -129,7 +129,7 @@
       },
       {
         "platform": "ABNMS3-goes",
-        "location_number": 34523434,
+        "location_number": "34523434",
         "location_name": " 444B5534",
         "active": "no",
         "transmission_id": " ",
@@ -137,7 +137,7 @@
       },
       {
         "platform": "ABNMS4-goes",
-        "location_number": 12342343,
+        "location_number": "12342343",
         "location_name": " 444900BC",
         "active": "no",
         "transmission_id": " ",
@@ -145,7 +145,7 @@
       },
       {
         "platform": "ABNMS5-goes",
-        "location_number": 323232235,
+        "location_number": "323232235",
         "location_name": " 444824AA",
         "active": "no",
         "transmission_id": " ",
@@ -153,7 +153,7 @@
       },
       {
         "platform": "ABNMS6-goes",
-        "location_number": 3453453445,
+        "location_number": "3453453445",
         "location_name": " 4449C5A2",
         "active": "no",
         "transmission_id": " ",
@@ -161,7 +161,7 @@
       },
       {
         "platform": "ABSMS-goes",
-        "location_number": 1231231123,
+        "location_number": "1231231123",
         "location_name": " 44415466",
         "active": "no",
         "transmission_id": " ",
@@ -169,7 +169,7 @@
       },
       {
         "platform": "ABEE-goes",
-        "location_number": 345354634,
+        "location_number": "345354634",
         "location_name": " 444A6254",
         "active": "yes",
         "transmission_id": " ",
@@ -177,7 +177,7 @@
       },
       {
         "platform": "ABNMS-goes",
-        "location_number": 123423444,
+        "location_number": "123423444",
         "location_name": " 444717A2",
         "active": "no",
         "transmission_id": " ",
@@ -185,7 +185,7 @@
       },
       {
         "platform": "ABNMS3-goes",
-        "location_number": 12342365,
+        "location_number": "12342365",
         "location_name": " 444B5534",
         "active": "yes",
         "transmission_id": " ",
@@ -193,7 +193,7 @@
       },
       {
         "platform": "ABNMS4-goes",
-        "location_number": 12342346,
+        "location_number": "12342346",
         "location_name": " 444900BC",
         "active": "no",
         "transmission_id": " ",
@@ -201,7 +201,7 @@
       },
       {
         "platform": "ABNMS5-goes",
-        "location_number": 123423645,
+        "location_number": "123423645",
         "location_name": " 444824AA",
         "active": "no",
         "transmission_id": " ",
@@ -209,7 +209,7 @@
       },
       {
         "platform": "ABNMS6-goes",
-        "location_number": 23423462,
+        "location_number": "23423462",
         "location_name": " 4449C5A2",
         "active": "no",
         "transmission_id": " ",
@@ -217,7 +217,7 @@
       },
       {
         "platform": "ABSMS-goes",
-        "location_number": 12342345,
+        "location_number": "12342345",
         "location_name": " 44415466",
         "active": "yes",
         "transmission_id": " ",

@@ -5,8 +5,11 @@
 }
 
 .text-box {
-    margin: 2vh 2vh;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
     padding: 1vh;
+    display: inline-block;
+    width: 25%;
 }
 
 #message-data-box {
@@ -26,4 +29,14 @@
 
 #data-display {
     display: inline-block;
+}
+
+#time-input {
+    display: inline-block;
+}
+
+#time-input {
+    margin-left: 1vw;
+    margin-right: 1vw;
+    width: 10vw;
 }

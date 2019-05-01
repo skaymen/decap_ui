@@ -1,26 +1,32 @@
 [
     {
         "message_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
-        "decoded_data": "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua"
+        "decoded": "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+        "raw": "asdfsd9723742nsaihdbfasu8ybfsyaf"
     },
     {
         "message_text": "Arcu risus quis varius quam quisque id diam",
-        "decoded_data": "Diam volutpat commodo sed egestas egestas fringilla phasellus"
+        "decoded": "Diam volutpat commodo sed egestas egestas fringilla phasellus",
+        "raw": "asdkfhb239847y23978fnnf9s8fs9"
     },
     {
         "message_text": "Tincidunt ornare massa eget egestas purus",
-        "decoded_data": "Enim diam vulputate ut pharetra"
+        "decoded": "Enim diam vulputate ut pharetra",
+        "raw": "fvasd98s798sd7c9s8d7cs98d7cs98dcsds"
     },
     {
         "message_text": "estibulum rhoncus est pellentesque elit",
-        "decoded_data": "Morbi tristique senectus et netus et malesuada fames"
+        "decoded": "Morbi tristique senectus et netus et malesuada fames",
+        "raw": "afsd98c7s98csdcjs9ducns9ducns9dcns9d8cnsd"
     },
     {
         "message_text": "In hendrerit gravida rutrum quisque non tellus orci ac",
-        "decoded_data": "Vulputate odio ut enim blandit volutpat"
+        "decoded": "Vulputate odio ut enim blandit volutpat",
+        "raw": "asdsdc98s7c9s8dc7s9d8c7sdc908sduc9s8d"
     },
     {
         "message_text": "Est lorem ipsum dolor sit amet consectetur adipiscing",
-        "decoded_data": " Enim nec dui nunc mattis"
+        "decoded": " Enim nec dui nunc mattis",
+        "raw": "avcsadcv98s7c9s87cd9sd87c9sd8c7"
     }
 ]

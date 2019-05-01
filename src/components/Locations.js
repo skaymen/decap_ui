@@ -6,7 +6,7 @@ import DropdownItems from "./DropdownItems.js";
 import DBButtonToolbar from "./DBButtonToolbar.js";
 import DataDisplay from "./DataDisplay.js";
 
-import sitedata from "../data/sitedata.json";
+import locationdata from "../data/locationdata.json";
 
 //define columns for the data table
 const columns = [
@@ -32,8 +32,8 @@ const columns = [
   }
 ];
 
-//site component. operates similarly to configs / platforms
-class Sites extends Component {
+//location component. operates similarly to configs / platforms
+class Locations extends Component {
   constructor(props) {
     super(props);
 
@@ -84,7 +84,7 @@ class Sites extends Component {
   }
 
   render() {
-    let data = sitedata;
+    let data = locationdata;
 
     //implement search function as in platforms / configs
     if (this.state.search) {
@@ -121,7 +121,7 @@ class Sites extends Component {
     return (
       <div id="component-div">
         <div id="component-header" style={{ flexDirection: "row" }}>
-          <h2 id="title"> Sites </h2>
+          <h2 id="title"> Locations </h2>
 
           <div id="filter">
             {/* bring in DropdownItems component */}
@@ -224,4 +224,4 @@ class Sites extends Component {
   }
 }
 
-export default Sites;
+export default Locations;
