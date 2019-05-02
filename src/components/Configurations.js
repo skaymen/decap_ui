@@ -148,7 +148,6 @@ class Configurations extends Component {
               </Dropdown.Item>
             </DropdownButton>
             {/* this is the filterbox, which searches immediately when text is entered */}
-            Filter:{" "}
             <input
               value={this.state.search}
               onChange={e => this.setState({ search: e.target.value })}

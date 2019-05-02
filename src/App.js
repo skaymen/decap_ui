@@ -4,7 +4,7 @@ import Messages from "./components/Messages";
 import Decoder from "./components/Decoder";
 import Configurations from "./components/Configurations";
 import Locations from "./components/Locations";
-import { Button, ButtonToolbar } from "react-bootstrap";
+import { Button, ButtonToolbar, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "./styles/App.css";
@@ -15,9 +15,13 @@ import Logo from "./images/usgs_logo.svg";
 class App extends Component {
   constructor(props) {
     super(props);
+
+    this.handleChange = this.handleChange.bind(this);
+
     this.state = {
       // the platforms component is loaded by default
-      selectedPage: "Platforms"
+      selectedPage: "Platforms",
+      value: 1
     };
     this.change = this.change.bind(this);
   }
@@ -26,12 +30,16 @@ class App extends Component {
     this.setState({ selectedPage: value });
   }
 
+  handleChange(value, event) {
+    this.setState({ value });
+  }
+
   render() {
     //display the selected page/component-- only platforms are currently set up
     return (
       <div className="App">
-        <Header selectedPage={this.state.selectedPage} change={this.change} />
-        <Body selectedPage={this.state.selectedPage} />
+        <Header value={this.state.value} handleChange={this.handleChange} />
+        <Body value={this.state.value} />
       </div>
     );
   }
@@ -47,54 +55,19 @@ class Header extends App {
         <div id="title-buttons">
           <h1 id="decap-title"> DECAP Database Editor </h1>
 
-          {/* button toolbar for navigating between pages. on click, change state to display the correct page */}
-          <ButtonToolbar id="comp-toolbar">
-            <Button
-              variant="outline-primary"
-              onClick={() => {
-                // this may not be the best-practice way to change the state. maybe something like displayPlatforms=true?
-                this.props.change("Platforms");
-              }}
-            >
-              Platforms
-            </Button>
-
-            <Button
-              variant="outline-primary"
-              onClick={() => {
-                this.props.change("Locations");
-              }}
-            >
-              Locations
-            </Button>
-
-            <Button
-              variant="outline-primary"
-              onClick={() => {
-                this.props.change("Configurations");
-              }}
-            >
-              Configurations
-            </Button>
-
-            <Button
-              variant="outline-primary"
-              onClick={() => {
-                this.props.change("Messages");
-              }}
-            >
-              Messages
-            </Button>
-
-            <Button
-              variant="outline-primary"
-              onClick={() => {
-                this.props.change("Decoder");
-              }}
-            >
-              Decoder
-            </Button>
-          </ButtonToolbar>
+          {/* radio buttons for navigating between components */}
+          <ToggleButtonGroup
+            type="radio"
+            defaultValue={1}
+            onChange={this.props.handleChange}
+            name="component-select"
+          >
+            <ToggleButton value={1}>Platforms</ToggleButton>
+            <ToggleButton value={2}>Locations</ToggleButton>
+            <ToggleButton value={3}>Configurations</ToggleButton>
+            <ToggleButton value={4}>Messages</ToggleButton>
+            <ToggleButton value={5}>Decoder</ToggleButton>
+          </ToggleButtonGroup>
         </div>
       </header>
     );
@@ -104,20 +77,20 @@ class Header extends App {
 //choose which component to display based on selectedPage
 class Body extends Component {
   render() {
-    switch (this.props.selectedPage) {
-      case "Platforms":
+    switch (this.props.value) {
+      case 1:
         return <Platforms />;
 
-      case "Locations":
+      case 2:
         return <Locations />;
 
-      case "Configurations":
+      case 3:
         return <Configurations />;
 
-      case "Messages":
+      case 4:
         return <Messages />;
 
-      case "Decoder":
+      case 5:
         return <Decoder />;
 
       default:

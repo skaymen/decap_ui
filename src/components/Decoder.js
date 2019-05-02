@@ -182,9 +182,9 @@ class FormatStatements extends Decoder {
           >
             x
           </Button>
-          Label:{" "}
+          Label{" "}
           <input className="label-input" defaultValue={statement.label} />
-          Format Statement:{" "}
+          Format Statement{" "}
           <input
             className="format-statement-input"
             defaultValue={statement.format_statement}

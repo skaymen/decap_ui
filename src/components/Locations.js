@@ -140,7 +140,6 @@ class Locations extends Component {
                 All
               </Dropdown.Item>
             </DropdownButton>
-            Filter:{" "}
             <input
               value={this.state.search}
               onChange={e => this.setState({ search: e.target.value })}
