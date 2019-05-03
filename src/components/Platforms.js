@@ -65,7 +65,8 @@ class Platforms extends Component {
 
   //show both the Window / modal and DataDisplay
   handleShow() {
-    this.setState({ showModal: true });
+    //uncomment this to show the pop up window
+    // this.setState({ showModal: true });
     this.setState({ key: Math.random() });
     this.setState({ showDataDisplay: true });
   }

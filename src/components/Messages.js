@@ -19,6 +19,14 @@ const dropdownItems = [
   { Header: "lrgseddn3.cr.usgs.gov" }
 ];
 
+const timePeriods = [
+  { Header: "1 hour" },
+  { Header: "4 hours" },
+  { Header: "24 hours" },
+  { Header: "2 days" },
+  { Header: "7 days" }
+];
+
 //messaging component for the database editor
 class Messages extends Component {
   constructor(props) {
@@ -27,28 +35,17 @@ class Messages extends Component {
     this.setTransmissionSource = this.setTransmissionSource.bind(this);
     this.onEarlyTimeBoundChange = this.onEarlyTimeBoundChange.bind(this);
     this.onLateTimeBoundChange = this.onLateTimeBoundChange.bind(this);
+    this.changeTimePeriodFilter = this.changeTimePeriodFilter.bind(this);
 
     this.state = {
       //keep track of which message we are on
       index: 0,
       //example data to use for prototype. actual data will come from backend when implemented
-      demo_data: {
-        source: "Water Science Center",
-        location: "17589_E76",
-        time_period: "12:03-18-13:04:54",
-        output_format: ".txt",
-        message_text: [
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-          "Orci sagittis eu volutpat odio facilisis mauris sit amet massa. Eget dolor morbi non arcu risus. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Vitae elementum curabitur vitae nunc sed. Dolor purus non enim praesent. Ut pharetra sit amet aliquam id diam maecenas ultricies mi. Senectus et netus et malesuada fames ac turpis egestas integer. Vel facilisis volutpat est velit egestas dui id ornare. Amet luctus venenatis lectus magna fringilla urna porttitor. Mi proin sed libero enim. Volutpat blandit aliquam etiam erat velit scelerisque in dictum non. Sed risus pretium quam vulputate dignissim suspendisse. Ut pharetra sit amet aliquam id. Tellus id interdum velit laoreet id. Sed blandit libero volutpat sed cras ornare. Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Nisi est sit amet facilisis magna etiam.",
-          "Ac turpis egestas integer eget aliquet nibh praesent tristique magna. Urna cursus eget nunc scelerisque viverra mauris in. Nam aliquam sem et tortor consequat id porta nibh venenatis. Ultricies mi eget mauris pharetra et ultrices. Ac placerat vestibulum lectus mauris ultrices. Nunc congue nisi vitae suscipit tellus. Bibendum est ultricies integer quis auctor elit sed. Vel quam elementum pulvinar etiam non. Pulvinar etiam non quam lacus suspendisse faucibus interdum posuere. Et malesuada fames ac turpis egestas maecenas pharetra convallis. Orci nulla pellentesque dignissim enim. Gravida neque convallis a cras. Mauris ultrices eros in cursus turpis massa tincidunt dui. Leo vel fringilla est ullamcorper. Nunc congue nisi vitae suscipit tellus mauris. Mattis nunc sed blandit libero.",
-          "Maecenas sed enim ut sem viverra aliquet. Ipsum dolor sit amet consectetur adipiscing elit pellentesque. Faucibus purus in massa tempor nec feugiat nisl. Enim ut tellus elementum sagittis vitae. Adipiscing commodo elit at imperdiet dui accumsan sit amet. Urna molestie at elementum eu facilisis sed odio morbi quis. Morbi tristique senectus et netus et. A iaculis at erat pellentesque adipiscing commodo elit at imperdiet. Neque volutpat ac tincidunt vitae semper quis lectus nulla. Nulla posuere sollicitudin aliquam ultrices sagittis. Quam pellentesque nec nam aliquam sem. Massa enim nec dui nunc mattis. Quis hendrerit dolor magna eget est lorem. Rutrum quisque non tellus orci ac auctor augue mauris augue. Placerat orci nulla pellentesque dignissim enim sit amet venenatis. Eget mi proin sed libero enim sed. Ut porttitor leo a diam. Turpis egestas integer eget aliquet nibh praesent. Ullamcorper malesuada proin libero nunc consequat interdum varius. Adipiscing enim eu turpis egestas pretium aenean.",
-          "Elit eget gravida cum sociis natoque penatibus. Nibh tortor id aliquet lectus proin nibh. Sapien nec sagittis aliquam malesuada bibendum arcu vitae elementum curabitur. Blandit turpis cursus in hac habitasse. Nibh mauris cursus mattis molestie a. In dictum non consectetur a erat nam. Justo nec ultrices dui sapien eget mi. Aliquet porttitor lacus luctus accumsan tortor posuere ac ut consequat. Viverra nibh cras pulvinar mattis nunc. At erat pellentesque adipiscing commodo elit at. Adipiscing tristique risus nec feugiat in fermentum. A arcu cursus vitae congue mauris. Amet massa vitae tortor condimentum lacinia quis. Nulla aliquet porttitor lacus luctus."
-        ]
-      },
       selected: null,
-      transmissionSource: "Transmission Source",
+      transmissionSource: "All",
       locationFilterState: "Location",
       timeFilterState: "Last",
+      timePeriodFilterState: "All",
       outputFormat: "raw",
       earlyTimeBound: "00:00:01",
       lateTimeBound: "23:59:59",
@@ -62,10 +59,15 @@ class Messages extends Component {
 
   changeLocationFilter(newState) {
     this.setState({ locationFilterState: newState });
+    this.setState({ search: "" });
   }
 
   changeTimeFilter(newState) {
     this.setState({ timeFilterState: newState });
+  }
+
+  changeTimePeriodFilter(newState) {
+    this.setState({ timePeriodFilterState: newState});
   }
 
   changeOutputFormat(newState) {
@@ -73,15 +75,14 @@ class Messages extends Component {
   }
 
   onEarlyTimeBoundChange(time) {
-    this.setState({earlyTimeBound: time});
+    this.setState({ earlyTimeBound: time });
   }
 
   onLateTimeBoundChange(time) {
-    this.setState({lateTimeBound: time});
+    this.setState({ lateTimeBound: time });
   }
 
   render() {
-
     var columns = [
       {
         Header: "Message Text",
@@ -90,10 +91,79 @@ class Messages extends Component {
       {
         Header: "Data",
         accessor: this.state.outputFormat
+      },
+      {
+        Header: "Source",
+        accessor: "source"
+      },
+      {
+        Header: "Time",
+        accessor: "time"
+      },
+      {
+        Header: "Location",
+        accessor: "location"
+      },
+      {
+        Header: "Transmission ID",
+        accessor: "transmission_id"
       }
     ];
 
     let data = messagedata;
+
+    if (this.state.transmissionSource !== "All") {
+      data = data.filter(row => {
+        return row.source.includes(this.state.transmissionSource);
+      });
+    }
+
+    if (this.state.timeFilterState === "Between") {
+      data = data.filter(row => {
+        return (
+          row.time >= this.state.earlyTimeBound &&
+          row.time <= this.state.lateTimeBound
+        );
+      });
+    }
+
+    if (this.state.locationFilterState === "Location") {
+      data = data.filter(row => {
+        return row.location.includes(this.state.search);
+      });
+    } else if (this.state.locationFilterState === "Transmission ID") {
+      data = data.filter(row => {
+        return row.transmission_id.includes(this.state.search);
+      });
+    }
+
+    if (this.state.timePeriodFilterState !== "All") {
+      data = data.filter(row => {
+        switch(this.state.timePeriodFilterState) {
+
+          case "1 hour":
+            return row.time >= "23:00:00";
+
+          case "4 hours":
+            return row.time >= "20:00:00";
+
+          case "24 hours":
+            return row.time >= "00:00:00";
+
+          case "2 days":
+            return row.time;
+
+          case "7 days":
+            return row.time;
+
+          default:
+            return null;
+
+          
+
+        }
+      });
+    }
     return (
       <div id="messages">
         {/* list relevant informationon along the top. Inputs are not yet functional */}
@@ -111,6 +181,15 @@ class Messages extends Component {
                   filterState={this.state.transmissionSource}
                   changeFilter={this.setTransmissionSource}
                 />
+
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  onClick={() => {
+                    this.setTransmissionSource("All");
+                  }}
+                >
+                  All
+                </Dropdown.Item>
               </DropdownButton>
             </div>
           </div>
@@ -148,62 +227,85 @@ class Messages extends Component {
 
           <div className="text-box">
             <h3>Time Period</h3>
-            <div id="transmissions-dropdown-container">
-              <DropdownButton
-                id="transmission-dropdown"
-                title={this.state.timeFilterState}
-              >
-                <Dropdown.Item
-                  onClick={() => {
-                    this.changeTimeFilter("Last");
-                  }}
+            <div id="time-dropdown-input">
+              <div id="transmissions-dropdown-container">
+                <DropdownButton
+                  id="transmission-dropdown"
+                  title={this.state.timeFilterState}
                 >
-                  Last
-                </Dropdown.Item>
-                <Dropdown.Item
-                  onClick={() => {
-                    this.changeTimeFilter("Between");
-                  }}
-                >
+                  <Dropdown.Item
+                    onClick={() => {
+                      this.changeTimeFilter("Last");
+                    }}
+                  >
+                    Last
+                  </Dropdown.Item>
+                  <Dropdown.Item
+                    onClick={() => {
+                      this.changeTimeFilter("Between");
+                    }}
+                  >
+                    {" "}
+                    Between
+                  </Dropdown.Item>
+                </DropdownButton>
+              </div>
+              {this.state.timeFilterState === "Between" ? (
+                <div id="time-inputs">
                   {" "}
-                  Between
+                  <TimeField
+                    id="time-input"
+                    value={this.state.earlyTimeBound}
+                    onChange={this.onEarlyTimeBoundChange}
+                    showSeconds={true}
+                    style={{
+                      border: "2px solid #666",
+                      fontSize: 14,
+                      width: 75,
+                      padding: "5px 8px",
+                      color: "#333",
+                      borderRadius: 3
+                    }}
+                  />
+                  and
+                  <TimeField
+                    id="time-input"
+                    value={this.state.lateTimeBound}
+                    onChange={this.onLateTimeBoundChange}
+                    showSeconds={true}
+                    style={{
+                      border: "2px solid #666",
+                      fontSize: 14,
+                      width: 75,
+                      padding: "5px 8px",
+                      color: "#333",
+                      borderRadius: 3
+                    }}
+                  />
+                </div>
+              ) : (
+                <div id="time-period-dropdown-container">
+                  <DropdownButton
+                id="transmissions-dropdown"
+                title={this.state.timePeriodFilterState}
+              >
+                <DropdownItems
+                  columns={timePeriods}
+                  filterState={this.state.timePeriodFilterState}
+                  changeFilter={this.changeTimePeriodFilter}
+                />
+                <Dropdown.Divider />
+                <Dropdown.Item
+                  onClick={() => {
+                    this.changeTimePeriodFilter("All");
+                  }}
+                >
+                  All
                 </Dropdown.Item>
               </DropdownButton>
+                </div>
+              )}
             </div>
-            {this.state.timeFilterState === "Between" ? (
-              <div id="time-inputs">
-                {" "}
-                <TimeField
-                  id="time-input"
-                  value={this.state.earlyTimeBound}
-                  onChange={this.onEarlyTimeBoundChange}
-                  showSeconds={true}
-                  style={{
-                    border: "2px solid #666",
-                    fontSize: 14,
-                    width: 75,
-                    padding: "5px 8px",
-                    color: "#333",
-                    borderRadius: 3
-                  }}
-                />
-                and
-                <TimeField
-                  id="time-input"
-                  value={this.state.lateTimeBound}
-                  onChange={this.onLateTimeBoundChange}
-                  showSeconds={true}
-                  style={{
-                    border: "2px solid #666",
-                    fontSize: 14,
-                    width: 75,
-                    padding: "5px 8px",
-                    color: "#333",
-                    borderRadius: 3
-                  }}
-                />
-              </div>
-            ) : null}
           </div>
           <div className="text-box">
             <h3>Message Output Format</h3>

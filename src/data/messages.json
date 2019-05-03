@@ -2,31 +2,55 @@
     {
         "message_text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
         "decoded": "sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-        "raw": "asdfsd9723742nsaihdbfasu8ybfsyaf"
+        "raw": "asdfsd9723742nsaihdbfasu8ybfsyaf",
+        "source": "lrgseros1.cr.usgs.gov",
+        "time": "00:00:01",
+        "location": "Nebraska",
+        "transmission_id": "SDFG442"
     },
     {
         "message_text": "Arcu risus quis varius quam quisque id diam",
         "decoded": "Diam volutpat commodo sed egestas egestas fringilla phasellus",
-        "raw": "asdkfhb239847y23978fnnf9s8fs9"
+        "raw": "asdkfhb239847y23978fnnf9s8fs9",
+        "source": "lrgseros2.cr.usgs.gov",
+        "time": "02:06:23",
+        "location": "Wisconsin",
+        "transmission_id": "NHIY346"
     },
     {
         "message_text": "Tincidunt ornare massa eget egestas purus",
         "decoded": "Enim diam vulputate ut pharetra",
-        "raw": "fvasd98s798sd7c9s8d7cs98d7cs98dcsds"
+        "raw": "fvasd98s798sd7c9s8d7cs98d7cs98dcsds",
+        "source": "lrgseros3.cr.usgs.gov",
+        "time": "09:07:45",
+        "location": "California",
+        "transmission_id": "CEUN3468"
     },
     {
         "message_text": "estibulum rhoncus est pellentesque elit",
         "decoded": "Morbi tristique senectus et netus et malesuada fames",
-        "raw": "afsd98c7s98csdcjs9ducns9ducns9dcns9d8cnsd"
+        "raw": "afsd98c7s98csdcjs9ducns9ducns9dcns9d8cnsd",
+        "source": "lrgs2hq.er.usgs.gov",
+        "time": "12:45:32",
+        "location": "Delaware",
+        "transmission_id": "BDDS336"
     },
     {
         "message_text": "In hendrerit gravida rutrum quisque non tellus orci ac",
         "decoded": "Vulputate odio ut enim blandit volutpat",
-        "raw": "asdsdc98s7c9s8dc7s9d8c7sdc908sduc9s8d"
+        "raw": "asdsdc98s7c9s8dc7s9d8c7sdc908sduc9s8d",
+        "source": "lrgseddn1.cr.usgs.gov",
+        "time": "21:23:43",
+        "location": "New York",
+        "transmission_id": "BMJY2398"
     },
     {
         "message_text": "Est lorem ipsum dolor sit amet consectetur adipiscing",
         "decoded": " Enim nec dui nunc mattis",
-        "raw": "avcsadcv98s7c9s87cd9sd87c9sd8c7"
+        "raw": "avcsadcv98s7c9s87cd9sd87c9sd8c7",
+        "source": "lrgseddn2.cr.usgs.gov",
+        "time": "23:54:10",
+        "location": "Texas",
+        "transmission_id": "BSSE4578"
     }
 ]

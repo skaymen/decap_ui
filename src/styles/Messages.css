@@ -30,15 +30,12 @@
 #data-display {
     display: inline-block;
 }
-
-#time-input {
-    display: inline-block;
-}
-
 #time-input {
     margin-left: 1vw;
     margin-right: 1vw;
+    margin-top: 1vh;
     width: 10vw;
+    display: inline-block;
 }
 
 #transmissions-filter {
@@ -49,4 +46,9 @@
 #transmission-input {
     width: 10vw;
     margin-top: 1vh;
+}
+
+#time-dropdown-input {
+    display: flex;
+    justify-content: center;
 }

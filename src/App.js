@@ -4,7 +4,7 @@ import Messages from "./components/Messages";
 import Decoder from "./components/Decoder";
 import Configurations from "./components/Configurations";
 import Locations from "./components/Locations";
-import { Button, ButtonToolbar, ToggleButton, ToggleButtonGroup } from "react-bootstrap";
+import { ToggleButton, ToggleButtonGroup } from "react-bootstrap";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "./styles/App.css";
@@ -20,14 +20,8 @@ class App extends Component {
 
     this.state = {
       // the platforms component is loaded by default
-      selectedPage: "Platforms",
       value: 1
     };
-    this.change = this.change.bind(this);
-  }
-
-  change(value) {
-    this.setState({ selectedPage: value });
   }
 
   handleChange(value, event) {
