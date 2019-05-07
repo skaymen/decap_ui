@@ -12,23 +12,28 @@ import configdata from "../data/configdata.json";
 const columns = [
   {
     Header: "Name",
-    accessor: "name" // String-based value accessors!
+    accessor: "name", // String-based value accessors!
+    width: 300
   },
   {
     Header: "Binary / ASCII",
-    accessor: "binascii"
+    accessor: "binascii",
+    width: 200
   },
   {
     Header: "Parameters",
-    accessor: "params"
+    accessor: "params",
+    width: 300
   },
   {
     Header: "Transmission Interval",
-    accessor: "interval"
+    accessor: "interval",
+    width: 300
   },
   {
-    Header: "Number of Platforms",
-    accessor: "numplats"
+    Header: "# Platforms",
+    accessor: "numplats",
+    width: 200
   },
   {
     Header: "Description",
@@ -191,6 +196,8 @@ class Configurations extends Component {
         <DBButtonToolbar
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
+          data={data}
+          filename='configurations.json'
         />
         {this.state.show ? (
           <div id="data-display-container">

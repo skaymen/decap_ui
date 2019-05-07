@@ -17,23 +17,28 @@ import platformdata from "../data/platformdata.json";
 const columns = [
   {
     Header: "Platform",
-    accessor: "platform" // String-based value accessors!
+    accessor: "platform", // String-based value accessors!
+    width: 300
   },
   {
     Header: "Location Number",
-    accessor: "location_number"
+    accessor: "location_number",
+    width: 300
   },
   {
     Header: "Location Name",
-    accessor: "location_name"
+    accessor: "location_name",
+    width: 300
   },
   {
     Header: "Active",
-    accessor: "active"
+    accessor: "active",
+    width: 100
   },
   {
     Header: "Transmission ID",
-    accessor: "transmission_id"
+    accessor: "transmission_id",
+    width: 300
   },
   {
     Header: "Description",
@@ -123,7 +128,10 @@ class Platforms extends Component {
                   title: "Location Name",
                   value: this.state.selectedRow.row.location_name
                 },
-                { title: "Active", value: this.state.selectedRow.row.active },
+                { 
+                  title: "Active", 
+                  value: this.state.selectedRow.row.active,
+                },
                 {
                   title: "Transmission ID",
                   value: this.state.selectedRow.row.transmission_id
@@ -240,6 +248,8 @@ class Platforms extends Component {
         <DBButtonToolbar
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
+          data={data}
+          filename='platforms.json'
         />
 
         {window}

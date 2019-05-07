@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-// import { Button } from "react-bootstrap";
 import ReactTable from "react-table";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import DropdownItems from "./DropdownItems.js";
 import TimeField from "react-simple-timefield";
+import DBButtonToolbar from "./DBButtonToolbar.js";
+import DataDisplay from "./DataDisplay.js";
+
 
 import "../styles/Messages.css";
 
@@ -36,12 +38,16 @@ class Messages extends Component {
     this.onEarlyTimeBoundChange = this.onEarlyTimeBoundChange.bind(this);
     this.onLateTimeBoundChange = this.onLateTimeBoundChange.bind(this);
     this.changeTimePeriodFilter = this.changeTimePeriodFilter.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.handleCloseDataDisplay = this.handleCloseDataDisplay.bind(this);
+
 
     this.state = {
       //keep track of which message we are on
       index: 0,
       //example data to use for prototype. actual data will come from backend when implemented
-      selected: null,
+      selectedIndex: null,
+      selectedRow: {},
       transmissionSource: "All",
       locationFilterState: "Location",
       timeFilterState: "Last",
@@ -49,7 +55,8 @@ class Messages extends Component {
       outputFormat: "raw",
       earlyTimeBound: "00:00:01",
       lateTimeBound: "23:59:59",
-      search: ""
+      search: "",
+      showDataDisplay: false
     };
   }
 
@@ -67,7 +74,7 @@ class Messages extends Component {
   }
 
   changeTimePeriodFilter(newState) {
-    this.setState({ timePeriodFilterState: newState});
+    this.setState({ timePeriodFilterState: newState });
   }
 
   changeOutputFormat(newState) {
@@ -82,23 +89,20 @@ class Messages extends Component {
     this.setState({ lateTimeBound: time });
   }
 
+  handleShow() {
+    this.setState({ key: Math.random() });
+    this.setState({ showDataDisplay: true });
+  }
+
+  handleCloseDataDisplay() {
+    this.setState({ showDataDisplay: false });
+  }
+
   render() {
     var columns = [
       {
-        Header: "Message Text",
-        accessor: "message_text" // String-based value accessors!
-      },
-      {
-        Header: "Data",
-        accessor: this.state.outputFormat
-      },
-      {
         Header: "Source",
         accessor: "source"
-      },
-      {
-        Header: "Time",
-        accessor: "time"
       },
       {
         Header: "Location",
@@ -107,6 +111,20 @@ class Messages extends Component {
       {
         Header: "Transmission ID",
         accessor: "transmission_id"
+      },
+      {
+        Header: "Time",
+        accessor: "time"
+      },
+      {
+        Header: "Message Text",
+        accessor: "message_text", // String-based value accessors!
+        width: 500
+      },
+      {
+        Header: "Data",
+        accessor: this.state.outputFormat,
+        width: 500
       }
     ];
 
@@ -139,8 +157,7 @@ class Messages extends Component {
 
     if (this.state.timePeriodFilterState !== "All") {
       data = data.filter(row => {
-        switch(this.state.timePeriodFilterState) {
-
+        switch (this.state.timePeriodFilterState) {
           case "1 hour":
             return row.time >= "23:00:00";
 
@@ -158,12 +175,10 @@ class Messages extends Component {
 
           default:
             return null;
-
-          
-
         }
       });
     }
+
     return (
       <div id="messages">
         {/* list relevant informationon along the top. Inputs are not yet functional */}
@@ -286,23 +301,23 @@ class Messages extends Component {
               ) : (
                 <div id="time-period-dropdown-container">
                   <DropdownButton
-                id="transmissions-dropdown"
-                title={this.state.timePeriodFilterState}
-              >
-                <DropdownItems
-                  columns={timePeriods}
-                  filterState={this.state.timePeriodFilterState}
-                  changeFilter={this.changeTimePeriodFilter}
-                />
-                <Dropdown.Divider />
-                <Dropdown.Item
-                  onClick={() => {
-                    this.changeTimePeriodFilter("All");
-                  }}
-                >
-                  All
-                </Dropdown.Item>
-              </DropdownButton>
+                    id="transmissions-dropdown"
+                    title={this.state.timePeriodFilterState}
+                  >
+                    <DropdownItems
+                      columns={timePeriods}
+                      filterState={this.state.timePeriodFilterState}
+                      changeFilter={this.changeTimePeriodFilter}
+                    />
+                    <Dropdown.Divider />
+                    <Dropdown.Item
+                      onClick={() => {
+                        this.changeTimePeriodFilter("All");
+                      }}
+                    >
+                      All
+                    </Dropdown.Item>
+                  </DropdownButton>
                 </div>
               )}
             </div>
@@ -346,16 +361,17 @@ class Messages extends Component {
                   return {
                     onClick: e => {
                       this.setState({
-                        selected: rowInfo.index
+                        selectedIndex: rowInfo.index,
+                        selectedRow: rowInfo
                       });
                     },
                     style: {
                       background:
-                        rowInfo.index === this.state.selected
+                        rowInfo.index === this.state.selectedIndex
                           ? "#00afec"
                           : "white",
                       color:
-                        rowInfo.index === this.state.selected
+                        rowInfo.index === this.state.selectedIndex
                           ? "white"
                           : "black"
                     }
@@ -365,8 +381,56 @@ class Messages extends Component {
                 }
               }}
             />
+
+            <DBButtonToolbar
+              handleShow={this.handleShow}
+              selectedIndex={this.state.selectedIndex}
+              data={data}
+              filename="messages.json"
+            />
           </div>
+
+
         </div>
+
+        {/* bring in DataDisplay component */}
+        {this.state.showDataDisplay ? (
+          <div id="data-display-container">
+            <DataDisplay
+              close={this.handleCloseDataDisplay}
+              displayData={
+                this.state.selectedRow.row === undefined
+                  ? [{ title: "", value: "" }]
+                  : [
+                      {
+                        title: "Source",
+                        value: this.state.selectedRow.row.source
+                      },
+                      {
+                        title: "Location",
+                        value: this.state.selectedRow.row.location
+                      },
+                      {
+                        title: "Transmission ID",
+                        value: this.state.selectedRow.row.transmission_id
+                      },
+                      {
+                        title: "Time",
+                        value: this.state.selectedRow.row.time
+                      },
+                      {
+                        title: "Message Text",
+                        value: this.state.selectedRow.row.message_text
+                      },
+                      {
+                        title: "Decoded data",
+                        value: this.state.selectedRow.decoded
+                      }
+                    ]
+              }
+            />
+          </div>
+        ) : null}
       </div>
     );
   }

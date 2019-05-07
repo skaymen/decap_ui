@@ -12,19 +12,23 @@ import locationdata from "../data/locationdata.json";
 const columns = [
   {
     Header: "Number",
-    accessor: "number" // String-based value accessors!
+    accessor: "number", // String-based value accessors!
+    width: 300
   },
   {
     Header: "Name",
-    accessor: "name"
+    accessor: "name",
+    width: 300
   },
   {
     Header: "Transmission ID",
-    accessor: "transmission"
+    accessor: "transmission",
+    width: 300
   },
   {
     Header: "Active",
-    accessor: "active"
+    accessor: "active",
+    width: 100
   },
   {
     Header: "Comments",
@@ -182,6 +186,8 @@ class Locations extends Component {
         <DBButtonToolbar
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
+          data={data}
+          filename='locations.json'
         />
         {this.state.show ? (
           <div id="data-display-container">
