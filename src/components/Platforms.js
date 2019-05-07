@@ -155,13 +155,13 @@ class Platforms extends Component {
           case "Location Number":
             return row.location_number.includes(this.state.search);
 
-          case "Transport-ID":
+          case "Location Name":
             return row.location_name.includes(this.state.search);
 
-          case "Config":
+          case "Active":
             return row.active.includes(this.state.search);
 
-          case "Expiration":
+          case "Transmission ID":
             return row.transmission_id.includes(this.state.search);
 
           case "Description":

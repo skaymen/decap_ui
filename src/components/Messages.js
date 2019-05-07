@@ -385,7 +385,7 @@ class Messages extends Component {
             <DBButtonToolbar
               handleShow={this.handleShow}
               selectedIndex={this.state.selectedIndex}
-              selectedRow = {this.state.selectedRow.row}
+              selectedRow = {this.state.selectedRow}
               data={data}
               filename="messages.json"
             />

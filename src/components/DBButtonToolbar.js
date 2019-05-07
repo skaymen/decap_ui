@@ -10,6 +10,12 @@ class DBButtonToolbar extends Component {
     fileDownload(data, this.props.filename);
   }
 
+  // removeRow(data, index) {
+  //   var data_array = [...data];
+  //   data_array.splice(index, 1);
+  //   this.setState({data: data_array});
+  // }
+
   render() {
     return (
       <ButtonToolbar id="buttonbar">
@@ -73,8 +79,8 @@ class DBButtonToolbar extends Component {
           variant="danger"
           id="db-button"
           onClick={() => {
-            if (this.props.selectedIndex) {
-              alert("delete row " + this.props.selectedIndex);
+            if (this.props.selectedIndex >= 0) {
+              // this.removeRow(this.props.data, this.props.selectedIndex);
             } else {
               alert("nothing selected!");
             }

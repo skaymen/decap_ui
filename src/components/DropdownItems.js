@@ -10,6 +10,7 @@ class DropdownItems extends Component {
     var items = this.props.columns.map(function(column) {
       return (
         <Dropdown.Item
+          key={Math.random()}
           onClick={() => {
             changeFilter(column.Header);
           }}
