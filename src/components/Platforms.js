@@ -248,6 +248,7 @@ class Platforms extends Component {
         <DBButtonToolbar
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
+          selectedRow={this.state.selectedRow.row}
           data={data}
           filename='platforms.json'
         />

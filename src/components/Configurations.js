@@ -196,6 +196,7 @@ class Configurations extends Component {
         <DBButtonToolbar
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
+          selectedRow={this.state.selectedRow.row}
           data={data}
           filename='configurations.json'
         />

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button, ButtonToolbar } from "react-bootstrap";
 import fileDownload from "js-file-download"
+import CopyToClipboard from "react-copy-to-clipboard";
 
 //button toolbar for table interaction functionality
 class DBButtonToolbar extends Component {
@@ -39,12 +40,13 @@ class DBButtonToolbar extends Component {
         </Button>
 
         {/* copying doesn't do anything either */}
+        <CopyToClipboard text={JSON.stringify(this.props.selectedRow)}>
         <Button
           variant="primary"
           id="db-button"
           onClick={() => {
-            if (this.props.selectedIndex) {
-              alert("copy row " + this.props.selectedIndex);
+            if (this.props.selectedIndex >= 0) {
+              alert("row copied!");
             } else {
               alert("nothing selected!");
             }
@@ -52,6 +54,7 @@ class DBButtonToolbar extends Component {
         >
           Copy
         </Button>
+        </CopyToClipboard>
 
           {/* download json as file */}
         <Button
