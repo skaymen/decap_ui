@@ -45,13 +45,15 @@ class Locations extends Component {
     this.changeFilter = this.changeFilter.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
     this.state = {
       selectedIndex: -1,
       selectedRow: {},
       search: "",
       show: false,
-      filterState: "All"
+      filterState: "All",
+      deletevalues: []
     };
   }
 
@@ -87,6 +89,16 @@ class Locations extends Component {
     this.scrollToBottom();
   }
 
+  //add a row to the array of deleted rows
+  handleDelete() {
+    let delvals = this.state.deletevalues;
+    delvals.push(this.state.selectedRow.original);
+    this.setState({ deletevalues: delvals });
+    this.setState({ selectedRow: {} });
+    this.setState({ selectedIndex: -1 });
+    this.handleClose();
+  }
+
   render() {
     let data = locationdata;
 
@@ -119,6 +131,13 @@ class Locations extends Component {
               row.comments.includes(this.state.search)
             );
         }
+      });
+    }
+
+    //only return rows that are not in the array of deleted rows
+    if (this.state.deletevalues.length > 0) {
+      data = data.filter(row => {
+        return !this.state.deletevalues.includes(row);
       });
     }
 
@@ -187,8 +206,9 @@ class Locations extends Component {
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
           selectedRow={this.state.selectedRow.row}
+          handleDelete={this.handleDelete}
           data={data}
-          filename='locations.json'
+          filename="locations.json"
         />
         {this.state.show ? (
           <div id="data-display-container">

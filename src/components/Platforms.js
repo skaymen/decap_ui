@@ -55,6 +55,7 @@ class Platforms extends Component {
     this.handleShow = this.handleShow.bind(this);
     this.changeFilter = this.changeFilter.bind(this);
     this.handleCloseDataDisplay = this.handleCloseDataDisplay.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
     this.state = {
       selectedIndex: -1,
@@ -62,7 +63,8 @@ class Platforms extends Component {
       search: "",
       showModal: false,
       filterState: "All",
-      showDataDisplay: false
+      showDataDisplay: false,
+      deletevalues: []
     };
 
     this.windowNode = document.createElement("div");
@@ -102,6 +104,16 @@ class Platforms extends Component {
     this.scrollToBottom();
   }
 
+  //add a row to the array of deleted rows
+  handleDelete() {
+    let delvals = this.state.deletevalues;
+    delvals.push(this.state.selectedRow.original);
+    this.setState({ deletevalues: delvals });
+    this.setState({ selectedRow: {} });
+    this.setState({ selectedIndex: -1 });
+    this.handleCloseDataDisplay();
+  }
+
   render() {
     let data = platformdata;
 
@@ -128,9 +140,9 @@ class Platforms extends Component {
                   title: "Location Name",
                   value: this.state.selectedRow.row.location_name
                 },
-                { 
-                  title: "Active", 
-                  value: this.state.selectedRow.row.active,
+                {
+                  title: "Active",
+                  value: this.state.selectedRow.row.active
                 },
                 {
                   title: "Transmission ID",
@@ -178,6 +190,13 @@ class Platforms extends Component {
               row.description.includes(this.state.search)
             );
         }
+      });
+    }
+
+    //only return rows that are not in the array of deleted rows
+    if (this.state.deletevalues.length > 0) {
+      data = data.filter(row => {
+        return !this.state.deletevalues.includes(row);
       });
     }
 
@@ -250,7 +269,8 @@ class Platforms extends Component {
           selectedIndex={this.state.selectedIndex}
           selectedRow={this.state.selectedRow.row}
           data={data}
-          filename='platforms.json'
+          handleDelete={this.handleDelete}
+          filename="platforms.json"
         />
 
         {window}

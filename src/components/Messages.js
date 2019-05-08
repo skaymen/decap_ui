@@ -6,7 +6,6 @@ import TimeField from "react-simple-timefield";
 import DBButtonToolbar from "./DBButtonToolbar.js";
 import DataDisplay from "./DataDisplay.js";
 
-
 import "../styles/Messages.css";
 
 import messagedata from "../data/messages.json";
@@ -39,8 +38,8 @@ class Messages extends Component {
     this.onLateTimeBoundChange = this.onLateTimeBoundChange.bind(this);
     this.changeTimePeriodFilter = this.changeTimePeriodFilter.bind(this);
     this.handleShow = this.handleShow.bind(this);
-    this.handleCloseDataDisplay = this.handleCloseDataDisplay.bind(this);
-
+    this.handleClose = this.handleClose.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
     this.state = {
       //keep track of which message we are on
@@ -56,7 +55,8 @@ class Messages extends Component {
       earlyTimeBound: "00:00:01",
       lateTimeBound: "23:59:59",
       search: "",
-      showDataDisplay: false
+      showDataDisplay: false,
+      deletevalues: []
     };
   }
 
@@ -94,8 +94,18 @@ class Messages extends Component {
     this.setState({ showDataDisplay: true });
   }
 
-  handleCloseDataDisplay() {
+  handleClose() {
     this.setState({ showDataDisplay: false });
+  }
+
+  //add row to the array of deleted rows
+  handleDelete() {
+    let delvals = this.state.deletevalues;
+    delvals.push(this.state.selectedRow.original);
+    this.setState({ deletevalues: delvals });
+    this.setState({ selectedRow: {} });
+    this.setState({ selectedIndex: -1 });
+    this.handleClose();
   }
 
   render() {
@@ -176,6 +186,13 @@ class Messages extends Component {
           default:
             return null;
         }
+      });
+    }
+
+    //only return rows that are not in the array of deleted rows
+    if (this.state.deletevalues.length > 0) {
+      data = data.filter(row => {
+        return !this.state.deletevalues.includes(row);
       });
     }
 
@@ -385,20 +402,19 @@ class Messages extends Component {
             <DBButtonToolbar
               handleShow={this.handleShow}
               selectedIndex={this.state.selectedIndex}
-              selectedRow = {this.state.selectedRow}
+              selectedRow={this.state.selectedRow}
+              handleDelete={this.handleDelete}
               data={data}
               filename="messages.json"
             />
           </div>
-
-
         </div>
 
         {/* bring in DataDisplay component */}
         {this.state.showDataDisplay ? (
           <div id="data-display-container">
             <DataDisplay
-              close={this.handleCloseDataDisplay}
+              close={this.handleClose}
               displayData={
                 this.state.selectedRow.row === undefined
                   ? [{ title: "", value: "" }]

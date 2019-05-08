@@ -50,6 +50,7 @@ class Configurations extends Component {
     this.changeFilter = this.changeFilter.bind(this);
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
 
     this.state = {
       selectedIndex: -1,
@@ -57,6 +58,7 @@ class Configurations extends Component {
       search: "",
       show: false,
       filterState: "All",
+      deletevalues: []
     };
   }
 
@@ -89,6 +91,16 @@ class Configurations extends Component {
 
   componentDidUpdate() {
     this.scrollToBottom();
+  }
+
+  //add row to the array of deleted rows
+  handleDelete() {
+    let delvals = this.state.deletevalues;
+    delvals.push(this.state.selectedRow.original);
+    this.setState({ deletevalues: delvals });
+    this.setState({ selectedRow: {} });
+    this.setState({ selectedIndex: -1 });
+    this.handleClose();
   }
 
   render() {
@@ -127,6 +139,13 @@ class Configurations extends Component {
               row.description.includes(this.state.search)
             );
         }
+      });
+    }
+
+    //only return rows that are not in the array of deleted rows
+    if (this.state.deletevalues.length > 0) {
+      data = data.filter(row => {
+        return !this.state.deletevalues.includes(row);
       });
     }
 
@@ -197,12 +216,13 @@ class Configurations extends Component {
           handleShow={this.handleShow}
           selectedIndex={this.state.selectedIndex}
           selectedRow={this.state.selectedRow.row}
+          handleDelete={this.handleDelete}
           data={data}
-          filename='configurations.json'
+          filename="configurations.json"
         />
         {this.state.show ? (
           <div id="data-display-container">
-          {/* this brings in the DataDisplay component so data can be opened at the bottom of the screen */}
+            {/* this brings in the DataDisplay component so data can be opened at the bottom of the screen */}
             <DataDisplay
               close={this.handleClose}
               displayData={
